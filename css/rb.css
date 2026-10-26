@@ -311,3 +311,9 @@
 #ns-section-footer .footer-legal-container a{color:#fff!important;text-decoration:underline;text-underline-offset:3px}
 .rb-mark span{font-size:16.6vw}
 @media (max-width:767px){#ns-section-footer .footer-content{padding-left:20px!important;padding-right:20px!important}#ns-section-footer .footer-content>*{padding-left:0!important;padding-right:0!important}}
+/* fotos de producto enteras, sin recorte */
+.product-item-image-container.product-item-image-container-cropped{background:#fff}
+.product-item-image-container.product-item-image-container-cropped .product-item-image{object-fit:contain!important;padding:6% 5%;background:#fff}
+.rb-dcard-img{background:#fff}
+.rb-dcard-img img{object-fit:contain!important;padding:6% 5%}
+.rb-cols-6 .product-item-image-container-cropped .product-item-image,.rb-cols-3 .product-item-image-container-cropped .product-item-image{padding:4%}
