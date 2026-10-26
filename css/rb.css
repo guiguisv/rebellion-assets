@@ -317,3 +317,52 @@
 .rb-dcard-img{background:#fff}
 .rb-dcard-img img{object-fit:contain!important;padding:6% 5%}
 .rb-cols-6 .product-item-image-container-cropped .product-item-image,.rb-cols-3 .product-item-image-container-cropped .product-item-image{padding:4%}
+
+/* ===== v6 · menú de celular ===== */
+.rb-drawer{position:fixed;inset:0;z-index:100000;pointer-events:none;visibility:hidden;transition:visibility 0s .6s}
+.rb-drawer[aria-hidden=false]{pointer-events:auto;visibility:visible;transition:none}
+.rb-dr-bg{position:absolute;inset:0;background:rgba(17,17,17,.42);opacity:0;transition:opacity .5s var(--rb-ease)}
+.rb-drawer[aria-hidden=false] .rb-dr-bg{opacity:1}
+.rb-dr-panel{position:absolute;top:0;left:0;bottom:0;width:min(440px,100%);background:#fff;display:flex;flex-direction:column;transform:translateX(-102%);transition:transform .6s var(--rb-ease)}
+.rb-drawer[aria-hidden=false] .rb-dr-panel{transform:none}
+html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
+.rb-dr-head{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;border-bottom:1px solid rgba(17,17,17,.1);flex:0 0 auto}
+.rb-dr-head span{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#111;opacity:.55}
+.rb-dr-x{position:relative;width:40px;height:40px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.rb-dr-x i{position:absolute;left:11px;top:19px;width:18px;height:1.5px;background:#111;transition:transform .5s var(--rb-ease) .15s}
+.rb-dr-x i:first-child{transform:rotate(45deg)}.rb-dr-x i:last-child{transform:rotate(-45deg)}
+.rb-drawer[aria-hidden=true] .rb-dr-x i{transform:none}
+.rb-dr-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:18px 20px 28px}
+.rb-dr-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.rb-dr-tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#eee;color:#fff;text-decoration:none}
+.rb-dr-tile img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.08);transition:transform 1.2s var(--rb-ease)}
+.rb-drawer[aria-hidden=false] .rb-dr-tile img{transform:none}
+.rb-dr-tile span{position:absolute;left:12px;bottom:12px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.rb-dr-tile em{position:absolute;left:12px;top:12px;font-style:normal;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;background:#fff;color:#111;padding:6px 8px}
+.rb-cyber .rb-dr-tile-sale em,.rb-pre .rb-dr-tile-sale em{background:#E3132D;color:#fff}
+.rb-dr-list{list-style:none;margin:0;padding:0;counter-reset:none}
+.rb-dr-it{border-bottom:1px solid rgba(17,17,17,.12);opacity:0;transform:translateY(14px);transition:opacity .5s var(--rb-ease),transform .6s var(--rb-ease)}
+.rb-drawer[aria-hidden=false] .rb-dr-it{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*.045s)}
+.rb-dr-it>a,.rb-dr-it>button{display:flex;align-items:baseline;gap:14px;width:100%;padding:15px 0;background:none;border:0;color:#111;text-decoration:none;text-align:left;font-family:"Archivo",sans-serif;font-size:30px;line-height:1;letter-spacing:.04em;text-transform:uppercase;font-weight:300;cursor:pointer}
+.rb-dr-it small{font-size:9px;letter-spacing:.12em;opacity:.45;min-width:16px;transform:translateY(-10px)}
+.rb-dr-it.rb-cur>a,.rb-dr-it.rb-cur>button{font-style:normal;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.rb-dr-it b{position:relative;margin-left:auto;width:14px;height:14px;align-self:center}
+.rb-dr-it b:before,.rb-dr-it b:after{content:"";position:absolute;left:0;top:6.5px;width:14px;height:1.2px;background:#111;transition:transform .45s var(--rb-ease)}
+.rb-dr-it b:after{transform:rotate(90deg)}
+.rb-open b:after{transform:rotate(0)}
+.rb-dr-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--rb-ease)}
+.rb-open .rb-dr-more{grid-template-rows:1fr}
+.rb-dr-more>div{overflow:hidden;display:flex;flex-direction:column;padding-left:30px}
+.rb-dr-more a{padding:7px 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#111;text-decoration:none;opacity:.75}
+.rb-dr-more a:last-child{margin-bottom:14px}
+.rb-dr-help{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 16px}
+.rb-dr-help a{display:block;padding:9px 0;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#111;text-decoration:none;opacity:.6}
+.rb-dr-foot{margin-top:22px;border-top:1px solid rgba(17,17,17,.12);padding-top:18px}
+.rb-dr-wa{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:#111;color:#fff!important;text-decoration:none;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase}
+.rb-dr-wa span{font-size:16px;letter-spacing:0;transition:transform .4s var(--rb-ease)}
+.rb-dr-wa:hover span{transform:translateX(5px)}
+.rb-dr-row{display:flex;gap:24px;margin-top:14px}
+.rb-dr-row a{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#111;text-decoration:none;opacity:.6}
+@media (prefers-reduced-motion:reduce){.rb-dr-panel,.rb-dr-it,.rb-dr-tile img{transition:none!important}}
+/* barra de categorías en celular: aviso de que se desliza */
+@media (max-width:767px){.rb-nav-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:48px}}

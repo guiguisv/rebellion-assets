@@ -74,6 +74,7 @@ function nav(){
   if(!n||!h)return; if(!h.contains(n))h.appendChild(n);
   var path=location.pathname;
   [].forEach.call(n.querySelectorAll('.rb-nav-list > li > a'),function(a){var u=a.getAttribute('href');if(u&&u.charAt(0)==='/'&&u!=='/'&&path.indexOf(u)===0)a.parentNode.classList.add('rb-cur');});
+  var cur=n.querySelector('.rb-cur'),ul=n.querySelector('.rb-nav-list');if(cur&&ul&&ul.scrollWidth>ul.clientWidth)ul.scrollLeft=Math.max(0,cur.offsetLeft-20);
   R.classList.add('rb-has-nav');
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
@@ -200,6 +201,41 @@ function ficha(){
 
 function mark(){var m=D.querySelector('.rb-mark');if(!m)return;if(reduce||!('IntersectionObserver' in W)){m.classList.add('rb-in');return;}
   var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){m.classList.add('rb-in');o.disconnect();}});},{threshold:.2});o.observe(m);}
-function go(){nav();promo();travel();index();deals();ficha();mark();}
+/* ---------- Menú de celular: panel editorial en lugar del desplegable de Tienda Nube ---------- */
+function mnav(){
+  if(D.querySelector('.rb-drawer'))return;
+  var IMG='https://guiguisv.github.io/rebellion-assets/img/';
+  var cats=[['New Drop','/new-drop/'],['Botas','/botas/',[['Ver todas','/botas/'],['Caña alta','/botas/botas-cana/'],['Taco chupete','/botas/botas-taco-chupete/'],['Botas sandalia','/botas-sandalia/']]],
+    ['Texanas','/hasta-50-off/texanas/'],['Borcegos','/botas/borcegos/'],
+    ['Sandalias','/sandalias/',[['Ver todas','/sandalias/'],['Plataformas','/sandalias/plataformas/'],['Flats','/sandalias/flats/'],['Taco','/sandalias/taco/'],['Taco chupete','/sandalias/taco-chupete/'],['Taco chino','/sandalias/taco-chino/']]],
+    ['Mocasines','/mocasines/'],['Accesorios','/accesorios/',[['Ver todos','/accesorios/'],['Carteras','/accesorios/carteras/'],['Billeteras','/accesorios/billeteras/']]],
+    ['Gangas','/gangas/']];
+  var help=[['Mi cuenta','/account/login/'],['Guía de talles','/guia-de-talles/'],['Cambios','/cambios-y-devoluciones/'],['Cómo comprar','/como-comprar/'],['Preguntas','/preguntas-frecuentes/'],['Contacto','/contacto/']];
+  var path=location.pathname,n2=function(i){return(i<9?'0':'')+(i+1);};
+  var li=cats.map(function(c,i){var cur=path.indexOf(c[1])===0?' rb-cur':'';
+    if(!c[2])return '<li class="rb-dr-it'+cur+'" style="--i:'+i+'"><a href="'+c[1]+'"><small>'+n2(i)+'</small>'+c[0]+'</a></li>';
+    return '<li class="rb-dr-it rb-dr-sub'+cur+'" style="--i:'+i+'"><button type="button" aria-expanded="false"><small>'+n2(i)+'</small>'+c[0]+'<b></b></button><div class="rb-dr-more"><div>'+c[2].map(function(s){return '<a href="'+s[1]+'">'+s[0]+'</a>';}).join('')+'</div></div></li>';}).join('');
+  var el=D.createElement('div');el.className='rb-drawer';el.setAttribute('aria-hidden','true');
+  el.innerHTML='<div class="rb-dr-bg" data-rb-close></div><aside class="rb-dr-panel" role="dialog" aria-modal="true" aria-label="Menú">'+
+    '<header class="rb-dr-head"><span>Menú</span><button type="button" class="rb-dr-x" data-rb-close aria-label="Cerrar"><i></i><i></i></button></header>'+
+    '<div class="rb-dr-body"><div class="rb-dr-tiles">'+
+      '<a class="rb-dr-tile" href="/new-drop/"><img src="'+IMG+'nvo_a.jpg" alt="" loading="lazy"><span>New Drop</span></a>'+
+      '<a class="rb-dr-tile rb-dr-tile-sale" href="/hasta-50-off/"><img src="'+IMG+'tex_a.jpg" alt="" loading="lazy"><em data-rb-promo="menu">Sale</em><span>Hasta 50% off</span></a></div>'+
+    '<ol class="rb-dr-list">'+li+'</ol>'+
+    '<ul class="rb-dr-help">'+help.map(function(h){return '<li><a href="'+h[1]+'">'+h[0]+'</a></li>';}).join('')+'</ul>'+
+    '<div class="rb-dr-foot"><a class="rb-dr-wa" href="https://wa.me/5491160461320" target="_blank" rel="noopener">Escribinos por WhatsApp<span>→</span></a>'+
+      '<div class="rb-dr-row"><a href="https://wa.me/5491168786231" target="_blank" rel="noopener">Mayoristas</a><a href="https://www.instagram.com/somosrebellion/" target="_blank" rel="noopener">Instagram</a></div></div>'+
+    '</div></aside>';
+  D.body.appendChild(el);
+  var open=function(){el.setAttribute('aria-hidden','false');R.classList.add('rb-dr-open');setTimeout(function(){var x=el.querySelector('.rb-dr-x');x&&x.focus({preventScroll:true});},50);};
+  var close=function(){el.setAttribute('aria-hidden','true');R.classList.remove('rb-dr-open');};
+  W.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-target="#nav-hamburger"]');
+    if(b&&!el.contains(b)){e.preventDefault();e.stopImmediatePropagation();open();}},true);
+  el.addEventListener('click',function(e){if(e.target.closest('[data-rb-close]'))close();
+    var s=e.target.closest('.rb-dr-sub>button');if(s){var p=s.parentNode,o=p.classList.toggle('rb-open');s.setAttribute('aria-expanded',o);}});
+  D.addEventListener('keydown',function(e){if(e.key==='Escape'&&R.classList.contains('rb-dr-open'))close();});
+  W.addEventListener('pageshow',close);
+}
+function go(){nav();mnav();promo();travel();index();deals();ficha();mark();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
