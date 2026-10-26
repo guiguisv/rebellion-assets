@@ -216,3 +216,6 @@
 .rb-deal-txt b{font-size:10.5px;letter-spacing:.22em}.rb-deal-txt i{font-size:12px}
 .rb-dcard{flex-basis:44vw}
 }
+.rb-deals,.rb-deals *{text-align:left}
+.rb-deal-pct{justify-self:start}
+.rb-dcard{align-items:flex-start}
