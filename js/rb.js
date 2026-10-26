@@ -188,6 +188,15 @@ function ficha(){
   var pi=D.querySelector('[data-block-type="purchase-info"]');
   if(pi){item('Envíos, cuotas y cambios',[pi],'<p class="rb-acc-note">Tenés 30 días para cambiar tu par. <a href="/cambios-y-devoluciones/">Ver cambios y devoluciones</a>.</p>',false);}
   if(care)item('Cuidados',null,care,false);
+  /* pestañas tipo botones: una fila de botones y abajo el contenido elegido */
+  var its=[].slice.call(acc.querySelectorAll('.rb-acc-item'));
+  if(its.length>1){var bar=D.createElement('div');bar.className='rb-tabs';bar.setAttribute('role','tablist');
+    var short=function(t){return t.replace(/^Medidas de plantilla$/i,'Medidas').replace(/^Envíos, cuotas y cambios$/i,'Envíos y cambios');};
+    its.forEach(function(it,i){var t=it.querySelector('.rb-acc-btn span').textContent,b=D.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=short(t);
+      b.addEventListener('click',function(){pick(i,true);});bar.appendChild(b);it.setAttribute('role','tabpanel');});
+    var pick=function(i,user){its.forEach(function(it,j){it.classList.toggle('rb-on',j===i);});[].forEach.call(bar.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.classList.toggle('rb-on',j===i);});
+      if(user){var b=bar.children[i];bar.scrollTo({left:b.offsetLeft-bar.offsetLeft-16,behavior:'smooth'});}};
+    acc.insertBefore(bar,acc.firstChild);acc.classList.add('rb-tabbed');pick(0);}
   cont.innerHTML='';cont.appendChild(acc);
   var hd=box.querySelector('.product-description-heading');if(hd)hd.style.display='none';
   /* resalta en la tabla el talle elegido */
@@ -236,6 +245,54 @@ function mnav(){
   D.addEventListener('keydown',function(e){if(e.key==='Escape'&&R.classList.contains('rb-dr-open'))close();});
   W.addEventListener('pageshow',close);
 }
-function go(){nav();mnav();promo();travel();index();deals();ficha();mark();}
+/* ---------- Carrito: encabezado, barra de envío gratis, sugerencias y total fijo abajo ---------- */
+var ENVIO_GRATIS=250000;
+function cart(){
+  var m=D.getElementById('modal-cart');if(!m||m.classList.contains('rb-cart'))return;m.classList.add('rb-cart');
+  var body=m.querySelector('.modal-body'),list=m.querySelector('.js-ajax-cart-list'),empty=m.querySelector('.js-empty-ajax-cart'),row=m.querySelector('.cart-row');
+  if(!body||!list)return;
+  var money=function(n){return '$'+Math.round(n).toLocaleString('es-AR');};
+  var num=function(t){t=(t||'').replace(/[^\d,]/g,'').split(',')[0];return +t.replace(/\D/g,'')||0;};
+  var title=m.querySelector('.modal-title');if(title)title.innerHTML='Tu carrito <small class="rb-cart-n"></small>';
+  var ship=D.createElement('div');ship.className='rb-ship';ship.innerHTML='<p></p><span><i></i></span>';body.insertBefore(ship,body.firstChild);
+  if(empty)empty.insertAdjacentHTML('afterbegin','<div class="rb-cart-empty"><p>Tu carrito está vacío</p><div><a href="/new-drop/">New Drop</a><a href="/hasta-50-off/">Sale</a></div></div>');
+  var sug=D.createElement('div');sug.className='rb-sug';sug.innerHTML='<p class="rb-sug-t">Completá tu look</p><div class="rb-sug-rail"></div>';
+  (row||list).parentNode.insertBefore(sug,row||list.nextSibling);
+  if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
+  function sync(){
+    var items=[].slice.call(list.querySelectorAll('.js-cart-item')),q=0;
+    items.forEach(function(it){var i=it.querySelector('.js-cart-quantity-input');q+=i?(+i.value||1):1;
+      var v=it.querySelector('.cart-item-variant');if(v&&!v.dataset.rb){var p=v.textContent.replace(/[()]/g,'').split(',').map(function(s){return s.trim();});
+        if(p.length===2&&/^\d{2}(\.5)?$/.test(p[1]))v.textContent=p[0]+' · Talle '+p[1];else v.textContent=p.join(' · ');v.dataset.rb='1';}
+      var del=it.querySelector('.cart-item-delete-button');if(del&&!del.dataset.rb){del.dataset.rb='1';del.textContent='Quitar';}});
+    var n=m.querySelector('.rb-cart-n'),nt=q?'('+q+')':'';if(n&&n.textContent!==nt)n.textContent=nt;
+    m.classList.toggle('rb-cart-vacio',!items.length);
+    var tot=num((m.querySelector('.js-cart-total')||m.querySelector('.js-ajax-cart-total')||{}).textContent),p=ship.querySelector('p');
+    if(!items.length||!tot){ship.hidden=true;}else{ship.hidden=false;var f=Math.max(0,ENVIO_GRATIS-tot);
+      var ph=f?'Te faltan <b>'+money(f)+'</b> para el envío gratis':'<b>¡Tenés envío gratis!</b>';if(p.innerHTML!==ph)p.innerHTML=ph;ship.classList.toggle('rb-ok',!f);
+      ship.querySelector('i').style.width=Math.min(100,tot/ENVIO_GRATIS*100)+'%';}
+    var st=sug.querySelector('.rb-sug-t'),stt=items.length?'Completá tu look':'Te puede gustar';if(st.textContent!==stt)st.textContent=stt;
+    var inCart=items.map(function(it){var a=it.querySelector('a[href*="/productos/"]');return a?a.pathname:'';});
+    [].forEach.call(sug.querySelectorAll('.rb-scard'),function(c){c.hidden=inCart.indexOf(c.pathname)>-1;});
+  }
+  var cl=function(t){return (t||'').replace(/\s+/g,' ').trim().replace(/,00\b/g,'');};
+  function load(){if(sug.dataset.ok)return;sug.dataset.ok='1';
+    Promise.all(['/accesorios/','/new-drop/','/hasta-50-off/'].map(function(u){return fetch(u,{credentials:'same-origin'}).then(function(r){return r.text();}).catch(function(){return '';});})).then(function(pages){
+      var seen={},cards=[];
+      pages.forEach(function(t,k){var doc=new DOMParser().parseFromString(t,'text/html');
+        [].slice.call(doc.querySelectorAll('.js-item-product')).slice(0,k===0?4:3).forEach(function(it){
+          var a=it.querySelector('a[href*="/productos/"]');if(!a)return;var h=a.getAttribute('href');if(seen[h])return;seen[h]=1;
+          var img=it.querySelector('img'),src='';if(img){src=img.getAttribute('data-srcset')||img.getAttribute('srcset')||img.getAttribute('data-src')||img.getAttribute('src')||'';
+            if(/\s\d+w/.test(src)){var ps=src.split(',').map(function(s){return s.trim().split(/\s+/);});src=(ps.filter(function(p){return parseInt(p[1])>=320;})[0]||ps[ps.length-1])[0];}}
+          var nm=cl((it.querySelector('.js-item-name')||{}).textContent),pr=cl((it.querySelector('.js-price-display')||{}).textContent);
+          var cp=it.querySelector('.js-compare-price-display'),cpt=cp&&!/display:\s*none/.test(cp.getAttribute('style')||'')?cl(cp.textContent):'';
+          cards.push('<a class="rb-scard" href="'+h+'"><span class="rb-scard-img"><img src="'+src+'" alt="" loading="lazy"></span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span><em>Ver</em></a>');});});
+      sug.querySelector('.rb-sug-rail').innerHTML=cards.join('');sug.classList.toggle('rb-sug-on',!!cards.length);sync();
+    });}
+  var raf=0;new MutationObserver(function(){if(!raf)raf=requestAnimationFrame(function(){raf=0;sync();});}).observe(m,{childList:true,subtree:true,characterData:true});
+  new MutationObserver(function(){if(m.classList.contains('modal-show')||m.style.display==='block')load();}).observe(m,{attributes:true,attributeFilter:['class','style']});
+  sync();
+}
+function go(){nav();mnav();cart();promo();travel();index();deals();ficha();mark();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();

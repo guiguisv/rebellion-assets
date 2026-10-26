@@ -368,3 +368,90 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.rb-dr-panel,.rb-dr-it,.rb-dr-tile img{transition:none!important}}
 /* barra de categorías en celular: aviso de que se desliza */
 @media (max-width:767px){.rb-nav-list{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent);padding-right:48px}}
+
+/* ===== v7 · carrito ===== */
+.rb-cart .modal-header{background:#fff!important;border-bottom:1px solid rgba(17,17,17,.1);padding:0 20px!important;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.rb-cart .modal-title{font-family:"Archivo",sans-serif;font-size:11px!important;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:#111}
+.rb-cart .modal-title small{font-size:11px;letter-spacing:.1em;opacity:.45;font-weight:400;margin-left:4px}
+.rb-cart .modal-body{padding:0!important;display:flex;flex-direction:column}
+.rb-cart .js-ship-free-rest,.rb-cart .cart-summary-free-shipping-bar{display:none!important}
+.rb-ship{padding:14px 20px 16px;border-bottom:1px solid rgba(17,17,17,.08)}
+.rb-ship p{margin:0 0 10px;font-size:12px;letter-spacing:.02em;color:#111}
+.rb-ship p b{font-weight:600}
+.rb-ship span{display:block;height:2px;background:rgba(17,17,17,.1);overflow:hidden}
+.rb-ship i{display:block;height:100%;width:0;background:#111;transition:width .9s var(--rb-ease)}
+.rb-cart .cart-item{display:grid!important;grid-template-columns:96px 1fr;gap:16px;padding:20px!important;margin:0!important;border-bottom:1px solid rgba(17,17,17,.08)}
+.rb-cart .cart-item-image-container{width:96px!important;max-width:none!important;aspect-ratio:4/5;overflow:hidden;background:#f4f4f4;padding:0!important;margin:0!important}
+.rb-cart .cart-item-image-container a{display:block;width:100%;height:100%}
+.rb-cart .cart-item-image{width:100%!important;height:100%!important;object-fit:cover;border:0!important}
+.rb-cart .cart-item-info-container{display:flex;flex-direction:column;justify-content:space-between;min-width:0;padding:0!important;width:auto!important}
+.rb-cart .cart-item-product-info{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.rb-cart .cart-item-name{display:block;font-size:11px!important;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#111;text-decoration:none}
+.rb-cart .cart-item-variant{display:block;margin-top:7px;font-size:12px!important;color:#111;opacity:.55}
+.rb-cart .cart-item-delete-button{padding:0!important;font-size:10px!important;letter-spacing:.16em;text-transform:uppercase;color:#111!important;opacity:.45;text-decoration:underline;text-underline-offset:3px;transition:opacity .3s}
+.rb-cart .cart-item-delete-button:hover{opacity:1}
+.rb-cart .cart-item-totals-container{display:flex!important;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:14px}
+.rb-cart .cart-item-quantity{margin:0!important;width:auto!important}
+.rb-cart .form-quantity{width:104px!important;height:36px;margin:0!important;border:1px solid rgba(17,17,17,.22)!important;border-radius:0!important;background:#fff}
+.rb-cart .form-quantity .grid{display:grid!important;grid-template-columns:34px 1fr 34px!important;height:100%;align-items:center}
+.rb-cart .cart-quantity-btn{display:flex!important;align-items:center;justify-content:center;height:34px;padding:0!important;border:0!important;background:none!important}
+.rb-cart .cart-quantity-btn svg{width:10px;height:10px}
+.rb-cart .form-quantity .form-control-container{height:34px}
+.rb-cart .cart-quantity-input{display:block;width:100%!important;height:34px!important;line-height:34px;padding:0!important;border:0!important;background:none!important;text-align:center;font-size:13px!important;color:#111!important;-moz-appearance:textfield;appearance:textfield}
+.rb-cart .cart-quantity-input::-webkit-inner-spin-button,.rb-cart .cart-quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.rb-cart .cart-item-subtotal{text-align:right;font-size:14px;font-weight:500;line-height:1.3}
+.rb-cart .cart-compare-price-container{font-size:11px;font-weight:400;opacity:.55}
+.rb-cart .cart-compare-price-container *{font-size:11px!important}
+/* sugerencias */
+.rb-sug{display:none;padding:24px 0 22px 20px;border-bottom:1px solid rgba(17,17,17,.08)}
+.rb-sug.rb-sug-on{display:block}
+.rb-sug-t{margin:0 0 14px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#111}
+.rb-sug-rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-right:20px;-webkit-overflow-scrolling:touch}
+.rb-sug-rail::-webkit-scrollbar{display:none}
+.rb-scard{flex:0 0 128px;scroll-snap-align:start;color:#111;text-decoration:none}
+.rb-scard[hidden]{display:none}
+.rb-scard-img{display:block;aspect-ratio:4/5;background:#fff;border:1px solid rgba(17,17,17,.07);overflow:hidden}
+.rb-scard-img img{width:100%;height:100%;object-fit:contain;padding:8%;transition:transform .8s var(--rb-ease)}
+.rb-scard:hover .rb-scard-img img{transform:scale(1.05)}
+.rb-scard b{display:block;margin-top:9px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-scard span{display:block;margin-top:4px;font-size:12px}
+.rb-scard s{opacity:.45;font-size:11px;margin-right:4px}
+.rb-scard em{display:inline-block;margin-top:8px;font-style:normal;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px}
+/* total fijo abajo */
+.rb-cart .cart-row{position:sticky;bottom:0;z-index:3;margin:auto 0 0!important;padding:16px 20px calc(14px + env(safe-area-inset-bottom))!important;background:#fff;border-top:1px solid rgba(17,17,17,.1);box-shadow:0 -12px 30px rgba(17,17,17,.05)}
+.rb-cart-vacio .cart-row{display:none}
+.rb-cart .cart-totals-row{display:flex!important;justify-content:space-between;align-items:baseline;margin:0 0 6px!important;font-size:12px!important}
+.rb-cart .cart-totals-subtotal{opacity:.6}
+.rb-cart .cart-totals-total{margin:4px 0 14px!important;font-size:11px!important;letter-spacing:.24em;text-transform:uppercase;font-weight:600}
+.rb-cart .cart-totals-total .js-cart-total,.rb-cart .cart-totals-total>*:last-child{font-size:19px!important;letter-spacing:0;font-weight:500;text-transform:none}
+.rb-cart .payment-discount-price-cart-container{font-size:11.5px!important;margin:-6px 0 12px!important;opacity:.7}
+.rb-cart .js-ajax-cart-submit .btn,.rb-cart .btn-primary{height:54px;border-radius:0!important;font-size:11px!important;letter-spacing:.28em;font-weight:600}
+.rb-cart-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 0;list-style:none;margin:12px 0 4px;padding:0}
+.rb-cart-trust li{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+.rb-cart-trust li+li:before{content:"·";margin:0 8px}
+.rb-cart .cart-continue-shopping{margin:6px 0 0!important;text-align:center}
+.rb-cart .cart-continue-shopping .btn{font-size:9.5px!important;letter-spacing:.2em;opacity:.6;padding:6px!important}
+/* carrito vacío */
+.rb-cart .js-empty-ajax-cart .alert{display:none!important}
+.rb-cart-empty{padding:36px 20px 8px}
+.rb-cart-empty p{margin:0 0 20px;font-family:"Archivo",sans-serif;font-weight:300;font-size:30px;line-height:1.05;letter-spacing:.03em;text-transform:uppercase;color:#111}
+.rb-cart-empty div{display:flex;gap:8px}
+.rb-cart-empty a{flex:1;display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #111;color:#111;text-decoration:none;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;transition:background .3s,color .3s}
+.rb-cart-empty a:last-child,.rb-cart-empty a:hover{background:#111;color:#fff}
+
+/* ===== v7 · ficha: secciones como botones ===== */
+.rb-acc.rb-tabbed{border-top:0;margin-top:4px}
+.rb-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0 2px;-webkit-overflow-scrolling:touch}
+.rb-tabs::-webkit-scrollbar{display:none}
+.rb-tabs button{flex:0 0 auto;appearance:none;-webkit-appearance:none;border:1px solid rgba(17,17,17,.22);border-radius:0;background:#fff;color:#111;padding:13px 16px;font:inherit;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;white-space:nowrap;cursor:pointer;transition:background .35s var(--rb-ease),color .35s var(--rb-ease),border-color .35s var(--rb-ease)}
+.rb-tabs button:hover{border-color:#111}
+.rb-tabs button.rb-on{background:#111;color:#fff;border-color:#111}
+.rb-tabs button:focus-visible{outline:1px solid #111;outline-offset:3px}
+.rb-tabbed .rb-acc-btn{display:none}
+.rb-tabbed .rb-acc-item{display:none;border-bottom:0}
+.rb-tabbed .rb-acc-item.rb-on{display:block;animation:rb-tabin .55s var(--rb-ease)}
+.rb-tabbed .rb-acc-body{grid-template-rows:1fr!important}
+.rb-tabbed .rb-acc-pad{padding:22px 0 10px}
+@keyframes rb-tabin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:767px){.rb-tabs{margin:0 -16px;padding:2px 16px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}}
+@media (prefers-reduced-motion:reduce){.rb-tabbed .rb-acc-item.rb-on{animation:none}}
