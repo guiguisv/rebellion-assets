@@ -306,3 +306,8 @@
 .rb-f-social{flex-direction:row;flex-wrap:wrap;gap:18px 26px}.rb-f-social .rb-f-h{flex-basis:100%}
 .rb-f-card{max-width:none}
 }
+#ns-section-footer .footer-legal-container *,#ns-section-footer .claim-text{opacity:1!important}
+#ns-section-footer .footer-legal-container{opacity:.7!important;color:#fff}
+#ns-section-footer .footer-legal-container a{color:#fff!important;text-decoration:underline;text-underline-offset:3px}
+.rb-mark span{font-size:16.6vw}
+@media (max-width:767px){#ns-section-footer .footer-content{padding-left:20px!important;padding-right:20px!important}#ns-section-footer .footer-content>*{padding-left:0!important;padding-right:0!important}}
