@@ -161,6 +161,42 @@ function deals(){
     [].forEach.call(list.querySelectorAll('.rb-deal-pct'),function(p){io2.observe(p);});io2.observe(list);}
   else if(first)toggle(first,true);
 }
-function go(){nav();promo();travel();index();deals();}
+
+/* ---------- ficha: descripción en pestañas desplegables ---------- */
+function ficha(){
+  var box=D.querySelector('.product-info-description'),cont=box&&box.querySelector('.js-product-description');
+  if(!cont||box.querySelector('.rb-acc'))return;
+  [].forEach.call(box.querySelectorAll('.rb-more'),function(b){b.remove();});
+  [].forEach.call(cont.querySelectorAll('.rb-clamp'),function(p){p.classList.remove('rb-clamp','rb-open');});
+  var secs=[{t:'Descripción',n:[]}];
+  [].slice.call(cont.childNodes).forEach(function(x){if(x.nodeType===1&&x.tagName==='H4'){secs.push({t:x.textContent.trim(),n:[]});x.remove();}else secs[secs.length-1].n.push(x);});
+  if(!secs[0].n.filter(function(x){return (x.textContent||'').trim();}).length)secs.shift();
+  var txt=(cont.textContent||'').toLowerCase(),care='';
+  if(/gamuza/.test(txt))care='<p>Limpieza en seco. Sin secador ni sol en exceso. Usá protector en spray antes de estrenarlas y dejalo secar.</p>';
+  else if(/charol/.test(txt))care='<p>Sin sol en exceso ni secador. Si se mojan, secá con un trapo limpio sin frotar y dejalas en un lugar ventilado.</p>';
+  else if(/vegano|\bpu\b|sint[eé]tico/.test(txt))care='<p>Limpiá con un trapo húmedo. No uses productos con silicona: pueden dañar el color.</p>';
+  else if(/cuero/.test(txt))care='<p>Aplicá ceras incoloras. No uses productos con silicona: pueden dañar el color.</p>';
+  var acc=D.createElement('div');acc.className='rb-acc';
+  function item(title,nodes,html,open){var it=D.createElement('div');it.className='rb-acc-item'+(open?' rb-open':'');
+    it.innerHTML='<button type="button" class="rb-acc-btn" aria-expanded="'+(open?'true':'false')+'"><span>'+title+'</span><i aria-hidden="true"></i></button><div class="rb-acc-body"><div class="rb-acc-in"><div class="rb-acc-pad user-content"></div></div></div>';
+    var pad=it.querySelector('.rb-acc-pad');(nodes||[]).forEach(function(x){pad.appendChild(x);});if(html)pad.insertAdjacentHTML('beforeend',html);
+    it.querySelector('.rb-acc-btn').addEventListener('click',function(){var o=it.classList.toggle('rb-open');this.setAttribute('aria-expanded',o);});
+    acc.appendChild(it);return it;}
+  secs.forEach(function(s,i){var it=item(s.t,s.n,'',i===0);if(/medidas/i.test(s.t)){var tb=it.querySelector('table');if(tb){var w=D.createElement('div');w.className='rb-sizes-wrap';tb.parentNode.insertBefore(w,tb);w.appendChild(tb);}
+    it.querySelector('.rb-acc-pad').insertAdjacentHTML('beforeend','<p class="rb-acc-note">¿Entre dos talles? <a href="https://wa.me/5491160461320" target="_blank" rel="noopener">Escribinos por WhatsApp</a> y te asesoramos.</p>');}});
+  var pi=D.querySelector('[data-block-type="purchase-info"]');
+  if(pi){item('Envíos, cuotas y cambios',[pi],'<p class="rb-acc-note">Tenés 30 días para cambiar tu par. <a href="/cambios-y-devoluciones/">Ver cambios y devoluciones</a>.</p>',false);}
+  if(care)item('Cuidados',null,care,false);
+  cont.innerHTML='';cont.appendChild(acc);
+  var hd=box.querySelector('.product-description-heading');if(hd)hd.style.display='none';
+  /* resalta en la tabla el talle elegido */
+  function mark(){var sel=D.querySelector('#variation_2, select[name="variation[1]"]');var v=sel&&sel.value;var tb=acc.querySelector('.rb-sizes');if(!tb||!v)return;
+    var head=tb.rows[0];[].forEach.call(tb.querySelectorAll('.rb-on'),function(c){c.classList.remove('rb-on');});
+    for(var i=1;i<head.cells.length;i++){if(head.cells[i].textContent.trim()===v){[].forEach.call(tb.rows,function(r){if(r.cells[i])r.cells[i].classList.add('rb-on');});}}}
+  D.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.js-variant-button, .btn-variant'))setTimeout(mark,60);});
+  D.addEventListener('change',function(e){if(e.target&&e.target.matches&&e.target.matches('.js-variation-option'))setTimeout(mark,60);});
+  mark();
+}
+function go(){nav();promo();travel();index();deals();ficha();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
