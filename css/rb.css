@@ -87,4 +87,73 @@
 .rb-sale-tile-sub{font-size:13px;font-weight:300;opacity:.85}
 .rb-sale-tile-go{font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px;margin-top:6px}
 @media (max-width:767px){.rb-sale{padding-top:48px}.rb-sale-head{padding:0 20px 28px}.rb-sale-grid{grid-template-columns:1fr;gap:2px}.rb-sale-tile{aspect-ratio:4/5}}
-.js-item-product .product-item-discount{display:none!important}.rb-sale-band,.rb-look2-band{text-align:left}.rb-sale-head,.rb-sale-head *{text-align:left}.product-item-price-container .js-price-display{order:2}.product-item-price-container .js-compare-price-display{order:1;margin-left:0}@media (max-width:767px){.category-sort-button .category-controls-label{display:none}.category-sort-button-text::before{content:"Ordenar";font-size:10.5px;letter-spacing:.22em;text-transform:uppercase}}.rb-sale-tile-txt{text-align:left;align-items:flex-start}.rb-look2-side{align-items:flex-start}
+.js-item-product .product-item-discount{display:none!important}.rb-sale-band,.rb-look2-band{text-align:left}.rb-sale-head,.rb-sale-head *{text-align:left}.product-item-price-container .js-price-display{order:2}.product-item-price-container .js-compare-price-display{order:1;margin-left:0}@media (max-width:767px){.category-sort-button .category-controls-label{display:none}.category-sort-button-text::before{content:"Ordenar";font-size:10.5px;letter-spacing:.22em;text-transform:uppercase}}.rb-sale-tile-txt{text-align:left;align-items:flex-start}.rb-look2-side{align-items:flex-start}/* ===================== v5 ===================== */
+/* letra de volantas: sin cursiva */
+.rb-eyebrow,.rb-eyebrow em,.rich-text-section em,.newsletter-section em,.hero .media-content p em,.rb-look2-band em{font-family:"Archivo",sans-serif!important;font-style:normal!important;font-size:10.5px!important;letter-spacing:.3em!important;text-transform:uppercase!important;font-weight:500!important;opacity:.7}
+.rb-look2-band em{font-size:inherit!important;letter-spacing:inherit!important;opacity:1}
+.footer-institutional-description{font-family:"Archivo",sans-serif!important;font-style:normal!important;font-size:12px!important;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+/* menú principal */
+.rb-nav{position:relative;border-top:1px solid rgba(17,17,17,.08);background:#fff}
+.rb-nav-list{display:flex;justify-content:center;align-items:center;gap:clamp(18px,2.6vw,40px);list-style:none;margin:0;padding:0 32px}
+.rb-nav-list>li>a{display:flex;align-items:center;height:46px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:#111;text-decoration:none;background-image:linear-gradient(#111,#111);background-size:0 1px;background-repeat:no-repeat;background-position:0 calc(100% - 13px);transition:background-size .45s var(--rb-ease)}
+.rb-nav-list>li>a:hover,.rb-nav-list>li.rb-cur>a,.rb-has:hover>a,.rb-has:focus-within>a{background-size:100% 1px}
+.rb-nav-sale>a{font-weight:700!important}
+.rb-nav-sale i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#111;margin-right:9px}
+.rb-cyber .rb-nav-sale i,.rb-pre .rb-nav-sale i{background:#E3132D;animation:rb-pulse 1.6s infinite}
+.rb-cyber .rb-nav-sale>a{color:#E3132D}
+@keyframes rb-pulse{0%{box-shadow:0 0 0 0 rgba(227,19,45,.5)}70%{box-shadow:0 0 0 8px rgba(227,19,45,0)}100%{box-shadow:0 0 0 0 rgba(227,19,45,0)}}
+.rb-nav-mayo>a{opacity:.6}
+.rb-mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid rgba(17,17,17,.08);border-bottom:1px solid rgba(17,17,17,.08);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .35s var(--rb-ease),transform .35s var(--rb-ease),visibility .35s;z-index:5}
+.rb-has:hover .rb-mega,.rb-has:focus-within .rb-mega{opacity:1;visibility:visible;transform:none}
+.rb-mega-in{display:grid;grid-template-columns:1fr 300px;gap:48px;max-width:1100px;margin:0 auto;padding:36px 32px 40px}
+.rb-mega-col{display:flex;flex-direction:column;gap:12px}
+.rb-mega-col p{margin:0 0 6px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.5}
+.rb-mega-col a{font-size:22px;font-weight:300;letter-spacing:.06em;text-transform:uppercase;color:#111;text-decoration:none;transition:transform .4s var(--rb-ease),opacity .3s;display:inline-block}
+.rb-mega-col a:hover{transform:translateX(8px)}
+.rb-mega-img{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;color:#fff;text-decoration:none}
+.rb-mega-img img{width:100%;height:100%;object-fit:cover}
+.rb-mega-img span{position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+@media (min-width:768px){button[data-target="#nav-hamburger"]{display:none!important}}
+@media (max-width:767px){
+.rb-nav-list{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding:0 20px;gap:22px;-webkit-overflow-scrolling:touch}
+.rb-nav-list::-webkit-scrollbar{display:none}
+.rb-nav-list>li{flex:0 0 auto}.rb-nav-list>li>a{height:42px;font-size:10px;letter-spacing:.2em;background-position:0 calc(100% - 11px)}
+.rb-mega{display:none}
+}
+#ns-section-rb_nav{display:none}
+/* hero: REBELLION al centro que baja */
+.rb-hero-content{justify-content:center!important;align-items:center!important;padding:0!important}
+.rb-hero-scrim{background:linear-gradient(to top,rgba(0,0,0,.25),rgba(0,0,0,0) 60%)!important}
+.rb-hero-title{font-size:clamp(54px,10.6vw,200px)!important;letter-spacing:.12em!important;font-weight:300!important;text-align:center}
+.rb-travel-on .rb-hero-title{visibility:hidden}
+.rb-travel{position:absolute;z-index:30;pointer-events:none;margin:0;font-family:"Archivo",sans-serif;font-weight:300;text-transform:uppercase;line-height:.95;white-space:nowrap;color:#fff;transition:color .45s var(--rb-ease);will-change:transform}
+.rb-travel.rb-dark{color:#111}
+/* índice tipográfico de categorías */
+.rb-index{position:relative;background:#fff;padding:0 32px 72px}
+.rb-dock{height:24vw}
+.rb-idx-head{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(17,17,17,.14);font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.6}
+.rb-idx-list{list-style:none;margin:0;padding:0}
+.rb-idx-row{display:flex;align-items:center;gap:28px;padding:20px 0;border-bottom:1px solid rgba(17,17,17,.14);color:#111;text-decoration:none}
+.rb-idx-n{flex:0 0 42px;font-size:11px;letter-spacing:.18em;opacity:.45}
+.rb-idx-name{font-family:"Archivo",sans-serif;font-weight:300;font-size:clamp(34px,5.6vw,92px);line-height:1;letter-spacing:.05em;text-transform:uppercase;transition:transform .7s var(--rb-ease),letter-spacing .7s var(--rb-ease)}
+.rb-idx-row:hover .rb-idx-name{transform:translateX(22px);letter-spacing:.09em}
+.rb-idx-sale .rb-idx-name{color:transparent;-webkit-text-stroke:1.2px #111}
+.rb-cyber .rb-idx-sale .rb-idx-name{-webkit-text-stroke-color:#E3132D}
+.rb-idx-go{margin-left:auto;font-size:30px;font-weight:300;opacity:0;transform:translateX(-14px);transition:opacity .4s,transform .6s var(--rb-ease)}
+.rb-idx-row:hover .rb-idx-go{opacity:1;transform:none}
+.rb-idx-thumb{display:none}
+.rb-idx-float{position:fixed;left:0;top:0;width:min(300px,22vw);aspect-ratio:3/4;pointer-events:none;z-index:25;opacity:0;transition:opacity .35s var(--rb-ease);overflow:hidden;background:#eee}
+.rb-idx-float.rb-on{opacity:1}
+.rb-idx-float img{width:100%;height:100%;object-fit:cover}
+@media (max-width:767px){
+.rb-index{padding:0 20px 48px}.rb-dock{height:34vw}
+.rb-idx-head span+span{display:none}
+.rb-idx-row{gap:14px;padding:14px 0}.rb-idx-n{flex-basis:26px;font-size:10px}
+.rb-idx-name{font-size:clamp(26px,8.6vw,40px)}
+.rb-idx-thumb{display:block;margin-left:auto;width:48px;height:60px;object-fit:cover}
+.rb-idx-go{display:none}.rb-idx-float{display:none}
+}
+/* cuenta regresiva Cyber */
+.rb-countdown{margin:14px 0 0;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#fff}
+.rb-cyber .rb-sale-title{color:#fff}
+.rb-cyber .rb-sale{background:#0b0b0b}

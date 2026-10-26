@@ -65,3 +65,65 @@ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',all);else all(
 if(!reduce){W.addEventListener('scroll',onScroll,{passive:true});W.addEventListener('resize',onScroll);}
 var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(function(){badges();split();clips();collect();},120);}).observe(D.body,{childList:true,subtree:true});
 })();
+/* ===================== v5 ===================== */
+(function(){
+var D=document,R=D.documentElement,W=window,reduce=W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- menú principal dentro del encabezado fijo ---------- */
+function nav(){
+  var n=D.querySelector('.rb-nav'),h=D.querySelector('#ns-section-header .head-main')||D.querySelector('#ns-section-header');
+  if(!n||!h)return; if(!h.contains(n))h.appendChild(n);
+  var path=location.pathname;
+  [].forEach.call(n.querySelectorAll('.rb-nav-list > li > a'),function(a){var u=a.getAttribute('href');if(u&&u.charAt(0)==='/'&&u!=='/'&&path.indexOf(u)===0)a.parentNode.classList.add('rb-cur');});
+  R.classList.add('rb-has-nav');
+}
+/* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
+var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:7,menu:'Cyber',anuncio:'Cyber Monday · 2, 3 y 4 de noviembre'};
+function promo(){
+  var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
+  for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
+  var now=Date.now(),a=Date.parse(c.desde),b=Date.parse(c.hasta),q=(location.search.match(/rbpromo=(\w+)/)||[])[1];
+  var phase=q||(now>=a&&now<b?'cyber':(now<a&&a-now<c.previa_dias*864e5?'pre':''));
+  if(!phase)return;
+  R.classList.add('rb-'+phase);
+  if(phase==='cyber'){[].forEach.call(D.querySelectorAll('[data-rb-promo]'),function(x){var k=x.getAttribute('data-rb-promo');if(c[k])x.innerHTML=c[k];});}
+  var tr=D.querySelector('.rb-marquee-track');
+  if(tr&&c.anuncio){var items=[].map.call(tr.querySelectorAll('span'),function(s){return s.textContent;});var uniq=items.filter(function(x,i){return items.indexOf(x)===i;});
+    var half=[c.anuncio].concat(uniq);var full=[];while(full.length<8)full=full.concat(half);full=full.concat(full);
+    tr.innerHTML=full.map(function(x){return '<span>'+x+'</span>';}).join('');}
+  var cd=D.querySelector('[data-rb-countdown]');
+  if(cd&&phase==='pre'){cd.hidden=false;var tick=function(){var s=Math.max(0,(a-Date.now())/1000|0),d=s/86400|0,h=(s%86400)/3600|0,m=(s%3600)/60|0;cd.textContent='Cyber Monday en '+d+'d '+(h<10?'0':'')+h+'h '+(m<10?'0':'')+m+'m';};tick();setInterval(tick,30000);}
+}
+/* ---------- REBELLION baja con el scroll y se traba en la segunda sección ---------- */
+function travel(){
+  var t=D.querySelector('[data-rb-travel]'),dock=D.querySelector('.rb-dock'),hero=D.querySelector('#ns-section-hero');
+  if(!t||!dock||!hero)return;
+  var c=D.createElement('div');c.className='rb-travel';c.textContent=t.textContent.trim();c.setAttribute('aria-hidden','true');D.body.appendChild(c);
+  R.classList.add('rb-travel-on');
+  var st,dist,heroBottom,ch;
+  function measure(){
+    var cs=getComputedStyle(t);c.style.fontSize=cs.fontSize;c.style.letterSpacing=cs.letterSpacing;
+    ch=c.offsetHeight;dock.style.height=(ch+Math.round(W.innerHeight*0.12))+'px';
+    var r=t.getBoundingClientRect(),y=W.scrollY||W.pageYOffset;
+    st=r.top+y;var dr=dock.getBoundingClientRect();var end=dr.top+y+(dr.height-ch)/2;
+    dist=Math.max(0,end-st);var hb=hero.getBoundingClientRect();heroBottom=hb.bottom+y;
+    c.style.top=st+'px';c.style.left=((W.innerWidth-c.offsetWidth)/2)+'px';
+    frame();
+  }
+  function frame(){var y=W.scrollY||W.pageYOffset,m=reduce?dist:Math.min(y,dist);
+    c.style.transform='translate3d(0,'+m.toFixed(1)+'px,0)';
+    c.classList.toggle('rb-dark',st+m+ch*0.55>heroBottom);c.classList.toggle('rb-docked',m>=dist-1);}
+  var tk=false;W.addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(function(){tk=false;frame();});}},{passive:true});
+  W.addEventListener('resize',measure);W.addEventListener('load',measure);
+  if(D.fonts&&D.fonts.ready)D.fonts.ready.then(measure);measure();setTimeout(measure,600);
+}
+/* ---------- índice: imagen que sigue al cursor ---------- */
+function index(){
+  var box=D.querySelector('.rb-index'),fl=box&&box.querySelector('.rb-idx-float');if(!fl||!W.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  var img=fl.querySelector('img'),x=0,y=0,tx=0,ty=0,on=false;
+  [].forEach.call(box.querySelectorAll('.rb-idx-row'),function(r){r.addEventListener('mouseenter',function(){img.src=r.dataset.img;fl.classList.add('rb-on');on=true;});r.addEventListener('mouseleave',function(){fl.classList.remove('rb-on');on=false;});});
+  box.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
+  (function loop(){x+=(tx-x)*0.14;y+=(ty-y)*0.14;fl.style.transform='translate3d('+(x+28)+'px,'+(y-140)+'px,0)';requestAnimationFrame(loop);})();
+}
+function go(){nav();promo();travel();index();}
+if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
+})();
