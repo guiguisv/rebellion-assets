@@ -176,3 +176,43 @@
 @keyframes rb-tick{from{opacity:.25;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .rb-sale-grid{margin-top:8px}
 @media (max-width:767px){.rb-sale-head{flex-direction:column;align-items:flex-start}.rb-sale-right,.rb-cd{align-items:flex-start}.rb-cd-n span{min-width:0;padding:0 14px}.rb-cd-n span:first-child{padding-left:0}}
+/* Sale interactivo */
+.rb-deals{list-style:none;margin:0;padding:0 32px 32px;border-top:1px solid rgba(255,255,255,.16)}
+.rb-deal{border-bottom:1px solid rgba(255,255,255,.16)}
+.rb-deal-row{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:minmax(0,clamp(220px,34vw,560px)) 1fr 44px;align-items:center;gap:clamp(16px,3vw,48px);padding:clamp(16px,2vw,26px) 0;cursor:pointer;color:#fff}
+.rb-deal-row:focus-visible{outline:1px solid #fff;outline-offset:4px}
+.rb-deal-pct{font-family:"Archivo",sans-serif;font-weight:300;font-size:clamp(52px,8.6vw,148px);line-height:.85;letter-spacing:-.01em;white-space:nowrap;color:transparent;-webkit-text-stroke:1.3px #fff;transition:color .6s var(--rb-ease),-webkit-text-stroke-color .6s}
+.rb-deal-row:hover .rb-deal-pct,.rb-deal.rb-open .rb-deal-pct{color:#fff}
+.rb-cyber .rb-deal-pct{-webkit-text-stroke-color:#E3132D}
+.rb-cyber .rb-deal-row:hover .rb-deal-pct,.rb-cyber .rb-deal.rb-open .rb-deal-pct{color:#E3132D}
+.rb-deal-txt b{display:block;font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500}
+.rb-deal-txt i{display:block;margin-top:8px;font-style:normal;font-size:13px;font-weight:300;opacity:.6}
+.rb-deal-plus{position:relative;width:22px;height:22px;justify-self:end}
+.rb-deal-plus::before,.rb-deal-plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#fff;transition:transform .5s var(--rb-ease)}
+.rb-deal-plus::after{transform:rotate(90deg)}
+.rb-open .rb-deal-plus::after{transform:rotate(0)}
+.rb-deal-panel{max-height:0;overflow:hidden;transition:max-height .9s var(--rb-ease)}
+.rb-open .rb-deal-panel{max-height:720px}
+.rb-deal-rail{display:flex;gap:4px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:18px;-webkit-overflow-scrolling:touch}
+.rb-deal-rail::-webkit-scrollbar{display:none}
+.rb-deal-load{margin:8px 0 20px;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;opacity:.5}
+.rb-dcard{flex:0 0 clamp(168px,17vw,250px);scroll-snap-align:start;display:flex;flex-direction:column;gap:8px;color:#fff;text-decoration:none}
+.rb-open .rb-dcard{animation:rb-up .7s var(--rb-ease) both}
+.rb-dcard:nth-child(2){animation-delay:.06s}.rb-dcard:nth-child(3){animation-delay:.12s}.rb-dcard:nth-child(4){animation-delay:.18s}.rb-dcard:nth-child(5){animation-delay:.24s}.rb-dcard:nth-child(n+6){animation-delay:.3s}
+@keyframes rb-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.rb-dcard-img{position:relative;aspect-ratio:3/4;background:#f2f1ee;overflow:hidden}
+.rb-dcard-img img{width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+.rb-dcard:hover .rb-dcard-img img{opacity:.88}
+.rb-dcard-img em{position:absolute;top:10px;left:10px;background:#fff;color:#111;font-style:normal;font-size:10px;letter-spacing:.14em;padding:5px 8px;font-weight:600}
+.rb-cyber .rb-dcard-img em{background:#E3132D;color:#fff}
+.rb-dcard b{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+.rb-dcard>span:last-child{font-size:12.5px;font-weight:300}
+.rb-dcard s{opacity:.45;margin-right:6px}
+.rb-deal-all{display:inline-block;margin:0 0 26px;color:#fff;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;text-decoration:underline;text-underline-offset:5px}
+@media (max-width:767px){
+.rb-deals{padding:0 20px 24px}
+.rb-deal-row{grid-template-columns:minmax(0,auto) 1fr 24px;gap:16px}
+.rb-deal-pct{font-size:clamp(40px,13vw,64px)}
+.rb-deal-txt b{font-size:10.5px;letter-spacing:.22em}.rb-deal-txt i{font-size:12px}
+.rb-dcard{flex-basis:44vw}
+}

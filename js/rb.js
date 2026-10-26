@@ -126,6 +126,41 @@ function index(){
   box.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
   (function loop(){x+=(tx-x)*0.14;y+=(ty-y)*0.14;fl.style.transform='translate3d('+(x+28)+'px,'+(y-140)+'px,0)';requestAnimationFrame(loop);})();
 }
-function go(){nav();promo();travel();index();}
+
+/* ---------- Sale interactivo: filas que cuentan y se abren con productos reales ---------- */
+function deals(){
+  var list=D.querySelector('.rb-deals');if(!list)return;
+  function cl(t){return (t||'').replace(/\s+/g,' ').trim().replace(/,00\b/g,'');}
+  function load(li){
+    var rail=li.querySelector('.rb-deal-rail');if(rail.dataset.ok)return;rail.dataset.ok='1';
+    rail.innerHTML='<p class="rb-deal-load">Cargando productos</p>';
+    fetch(li.dataset.url,{credentials:'same-origin'}).then(function(r){return r.text();}).then(function(t){
+      var doc=new DOMParser().parseFromString(t,'text/html');
+      var its=[].slice.call(doc.querySelectorAll('.js-item-product')).slice(0,10);
+      var html=its.map(function(it){
+        var a=it.querySelector('a[href*="/productos/"]'),img=it.querySelector('img'),src='';
+        if(img){src=img.getAttribute('data-srcset')||img.getAttribute('srcset')||img.getAttribute('data-src')||img.getAttribute('src')||'';
+          if(/\s\d+w/.test(src)){var ps=src.split(',').map(function(s){return s.trim().split(/\s+/);});var pk=ps.filter(function(p){return parseInt(p[1])>=480;})[0]||ps[ps.length-1];src=pk[0];}}
+        var nm=cl((it.querySelector('.js-item-name')||{}).textContent),pr=cl((it.querySelector('.js-price-display')||{}).textContent);
+        var cp=it.querySelector('.js-compare-price-display'),cpt=cp&&!/display:\s*none/.test(cp.getAttribute('style')||'')?cl(cp.textContent):'';
+        var off='';if(cpt){var x=+cpt.replace(/\D/g,''),y=+pr.replace(/\D/g,'');if(x>y&&y)off='<em>-'+Math.round((1-y/x)*100)+'%</em>';}
+        return '<a class="rb-dcard" href="'+(a?a.getAttribute('href'):li.dataset.url)+'"><span class="rb-dcard-img"><img src="'+src+'" alt="'+nm+'" loading="lazy">'+off+'</span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span></a>';
+      }).join('');
+      rail.innerHTML=html||'<p class="rb-deal-load">Muy pronto</p>';
+    }).catch(function(){rail.dataset.ok='';rail.innerHTML='';});
+  }
+  function toggle(li,force){var open=force!==undefined?force:!li.classList.contains('rb-open');
+    [].forEach.call(list.querySelectorAll('.rb-deal.rb-open'),function(o){if(o!==li){o.classList.remove('rb-open');o.querySelector('.rb-deal-row').setAttribute('aria-expanded','false');}});
+    li.classList.toggle('rb-open',open);li.querySelector('.rb-deal-row').setAttribute('aria-expanded',open?'true':'false');if(open)load(li);}
+  [].forEach.call(list.querySelectorAll('.rb-deal'),function(li){li.querySelector('.rb-deal-row').addEventListener('click',function(){toggle(li);});});
+  var first=list.querySelector('.rb-deal');
+  /* números que cuentan al entrar en pantalla */
+  function count(el){var m=el.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||reduce)return;var to=+m[2],t0=null;
+    function st(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1100),e=1-Math.pow(1-p,3);el.textContent=m[1]+Math.round(to*e)+m[3];if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
+  if('IntersectionObserver' in W){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);if(e.target.classList.contains('rb-deals')){if(first)toggle(first,true);}else count(e.target);}});},{threshold:.4});
+    [].forEach.call(list.querySelectorAll('.rb-deal-pct'),function(p){io2.observe(p);});io2.observe(list);}
+  else if(first)toggle(first,true);
+}
+function go(){nav();promo();travel();index();deals();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
