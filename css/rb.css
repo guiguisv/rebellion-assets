@@ -256,3 +256,53 @@
 .rb-sizes td.rb-on{opacity:1!important;background:#111!important;color:#fff!important}
 .rb-sizes td{white-space:nowrap}
 @media (max-width:767px){.rb-sizes th{width:64px;letter-spacing:.14em}.rb-sizes tr:last-child td{font-size:10.5px}.rb-sizes tr:first-child td{font-size:14px}}
+/* ===================== pie de página v2 ===================== */
+.rb-foot{display:none!important}
+.rb-foot2{background:#111;color:#fff;padding:88px 40px 36px;text-align:left}
+.rb-foot2 *{text-align:left}
+.rb-f-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.14)}
+.rb-f-claim{margin:0;font-family:"Archivo",sans-serif;font-weight:300;font-size:clamp(28px,3.6vw,56px);line-height:1.04;letter-spacing:.03em;text-transform:uppercase}
+.rb-f-up{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:12px;padding:13px 20px;border:1px solid rgba(255,255,255,.35);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;transition:background-color .35s,color .35s}
+.rb-f-up span{display:inline-block;transition:transform .45s var(--rb-ease)}
+.rb-f-up:hover{background:#fff;color:#111}.rb-f-up:hover span{transform:translateY(-3px)}
+.rb-f-grid{display:grid;grid-template-columns:1fr 1fr 1.7fr 1fr;gap:48px;padding-top:52px}
+.rb-f-col{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.rb-f-h{margin:0 0 10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.5}
+.rb-f-col>a{color:#fff;text-decoration:none;font-size:14px;font-weight:300;opacity:.85;background-image:linear-gradient(#fff,#fff);background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .45s var(--rb-ease),opacity .3s}
+.rb-f-col>a:hover{opacity:1;background-size:100% 1px}
+.rb-f-sale::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;margin-right:9px;vertical-align:middle}
+.rb-cyber .rb-f-sale::before,.rb-pre .rb-f-sale::before{background:#E3132D}
+.rb-f-card{display:flex;align-items:center;gap:14px;width:100%;max-width:420px;padding:15px 18px;border:1px solid rgba(255,255,255,.16);color:#fff;text-decoration:none;transition:background-color .35s,border-color .35s}
+.rb-f-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.4)}
+.rb-f-card svg{width:22px;height:22px;flex:0 0 22px;opacity:.9}
+.rb-f-card span{display:flex;flex-direction:column;gap:4px}
+.rb-f-card b{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500}
+.rb-f-card i{font-style:normal;font-size:12.5px;font-weight:300;opacity:.65}
+.rb-f-card em,.rb-f-social em{font-style:normal;margin-left:auto;display:inline-block;transition:transform .45s var(--rb-ease)}
+.rb-f-card:hover em,.rb-f-social a:hover em{transform:translate(3px,-3px)}
+.rb-f-mail{color:#fff;font-size:14px;font-weight:300;opacity:.85;margin-top:6px;text-decoration:none}
+.rb-f-loc{font-size:12.5px;font-weight:300;opacity:.5}
+.rb-f-social>a{font-family:"Archivo",sans-serif;font-size:clamp(20px,1.8vw,28px)!important;font-weight:300!important;letter-spacing:.04em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline}
+.rb-f-social em{margin-left:0;font-size:.7em}
+/* barra legal y medios de pago del tema */
+#ns-section-footer .footer-main-info{display:none!important}
+#ns-section-footer .footer-content{background:#111!important;border-top:1px solid rgba(255,255,255,.14);padding-top:28px!important;padding-bottom:24px!important}
+#ns-section-footer .footer-payment-shipping-label{font-size:10px!important;letter-spacing:.3em;text-transform:uppercase;font-weight:400!important;opacity:.5;margin-bottom:12px}
+#ns-section-footer .footer-payment-group img,#ns-section-footer .footer-logos-wrapper img{filter:grayscale(1);opacity:.55;transition:filter .3s,opacity .3s;height:22px;width:auto}
+#ns-section-footer .footer-payment-group img:hover{filter:none;opacity:1}
+#ns-section-footer .footer-legal-container,#ns-section-footer .claim-text,#ns-section-footer .footer-legal-container *{font-size:11px!important;opacity:.6;font-weight:300}
+#ns-section-footer .footer-legal-container a{opacity:1}
+#ns-section-footer .powered-by-logo{filter:grayscale(1);opacity:.5}
+/* palabra gigante */
+.rb-mark{background:#111;overflow:hidden;padding:8px 0 0;line-height:0}
+.rb-mark span{display:block;text-align:center;font-family:"Archivo",sans-serif;font-weight:300;font-size:18.4vw;line-height:.78;letter-spacing:-.01em;color:#fff;white-space:nowrap;transform:translateY(35%);transition:transform 1.4s var(--rb-ease)}
+.rb-mark.rb-in span{transform:translateY(8%)}
+@media (max-width:1100px){.rb-f-grid{grid-template-columns:1fr 1fr;gap:44px 32px}}
+@media (max-width:767px){
+.rb-foot2{padding:56px 20px 28px}
+.rb-f-top{flex-direction:column;align-items:flex-start;padding-bottom:32px}
+.rb-f-grid{grid-template-columns:1fr 1fr;gap:40px 20px;padding-top:40px}
+.rb-f-contact,.rb-f-social{grid-column:1/-1}
+.rb-f-social{flex-direction:row;flex-wrap:wrap;gap:18px 26px}.rb-f-social .rb-f-h{flex-basis:100%}
+.rb-f-card{max-width:none}
+}

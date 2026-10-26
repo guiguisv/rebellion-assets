@@ -197,6 +197,9 @@ function ficha(){
   D.addEventListener('change',function(e){if(e.target&&e.target.matches&&e.target.matches('.js-variation-option'))setTimeout(mark,60);});
   mark();
 }
-function go(){nav();promo();travel();index();deals();ficha();}
+
+function mark(){var m=D.querySelector('.rb-mark');if(!m)return;if(reduce||!('IntersectionObserver' in W)){m.classList.add('rb-in');return;}
+  var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){m.classList.add('rb-in');o.disconnect();}});},{threshold:.2});o.observe(m);}
+function go(){nav();promo();travel();index();deals();ficha();mark();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
