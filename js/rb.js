@@ -90,8 +90,10 @@ function promo(){
   if(tr&&c.anuncio){var items=[].map.call(tr.querySelectorAll('span'),function(s){return s.textContent;});var uniq=items.filter(function(x,i){return items.indexOf(x)===i;});
     var half=[c.anuncio].concat(uniq);var full=[];while(full.length<8)full=full.concat(half);full=full.concat(full);
     tr.innerHTML=full.map(function(x){return '<span>'+x+'</span>';}).join('');}
-  var cd=D.querySelector('[data-rb-countdown]');
-  if(cd&&phase==='pre'){cd.hidden=false;var tick=function(){var s=Math.max(0,(a-Date.now())/1000|0),d=s/86400|0,h=(s%86400)/3600|0,m=(s%3600)/60|0;cd.textContent='Cyber Monday en '+d+'d '+(h<10?'0':'')+h+'h '+(m<10?'0':'')+m+'m';};tick();setInterval(tick,30000);}
+  var cd=D.querySelector('[data-rb-cd]');
+  if(cd&&(phase==='pre'||phase==='cyber')){var tgt=phase==='pre'?a:b;cd.hidden=false;cd.querySelector('.rb-cd-l').textContent=phase==='pre'?'Cyber Monday empieza en':'Cyber Monday termina en';
+    var put=function(u,v){var e=cd.querySelector('[data-u="'+u+'"]');var t=(v<10?'0':'')+v;if(e&&e.textContent!==t){e.textContent=t;e.classList.remove('rb-tick');void e.offsetWidth;e.classList.add('rb-tick');}};
+    var tick=function(){var s=Math.max(0,(tgt-Date.now())/1000|0);put('d',s/86400|0);put('h',(s%86400)/3600|0);put('m',(s%3600)/60|0);put('s',s%60);};tick();setInterval(tick,1000);}
 }
 /* ---------- REBELLION baja con el scroll y se traba en la segunda sección ---------- */
 function travel(){

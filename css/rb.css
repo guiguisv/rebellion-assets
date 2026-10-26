@@ -161,3 +161,18 @@
 .rb-idx-row,.rb-idx-name{text-align:left}
 .rb-idx-name{white-space:nowrap}
 @media (max-width:767px){.rb-idx-name{font-size:clamp(22px,7.4vw,36px)}}
+/* contador Cyber */
+.rb-sale-head{align-items:flex-end}
+.rb-sale-right{display:flex;flex-direction:column;align-items:flex-end;gap:22px}
+.rb-cd{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.rb-cd-l{margin:0;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.6}
+.rb-cd-n{display:flex}
+.rb-cd-n span{display:flex;flex-direction:column;align-items:center;min-width:clamp(64px,7vw,104px);padding:0 clamp(10px,1.4vw,22px);border-left:1px solid rgba(255,255,255,.18)}
+.rb-cd-n span:first-child{border-left:0;padding-left:0}
+.rb-cd-n span:last-child{padding-right:0}
+.rb-cd-n b{font-family:"Archivo",sans-serif;font-weight:300;font-size:clamp(34px,4.4vw,68px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.rb-cd-n b.rb-tick{animation:rb-tick .5s var(--rb-ease)}
+.rb-cd-n i{font-style:normal;margin-top:8px;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;opacity:.55}
+@keyframes rb-tick{from{opacity:.25;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.rb-sale-grid{margin-top:8px}
+@media (max-width:767px){.rb-sale-head{flex-direction:column;align-items:flex-start}.rb-sale-right,.rb-cd{align-items:flex-start}.rb-cd-n span{min-width:0;padding:0 14px}.rb-cd-n span:first-child{padding-left:0}}
