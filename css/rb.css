@@ -381,7 +381,7 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 .rb-ship span{display:block;height:2px;background:rgba(17,17,17,.1);overflow:hidden}
 .rb-ship i{display:block;height:100%;width:0;background:#111;transition:width .9s var(--rb-ease)}
 .rb-cart .cart-item{display:grid!important;grid-template-columns:96px 1fr;gap:16px;padding:20px!important;margin:0!important;border-bottom:1px solid rgba(17,17,17,.08)}
-.rb-cart .cart-item-image-container{width:96px!important;max-width:none!important;aspect-ratio:4/5;overflow:hidden;background:#f4f4f4;padding:0!important;margin:0!important}
+.rb-cart .cart-item-image-container{width:96px!important;max-width:none!important;height:120px!important;aspect-ratio:4/5;overflow:hidden;background:#f4f4f4;padding:0!important;margin:0!important}
 .rb-cart .cart-item-image-container a{display:block;width:100%;height:100%}
 .rb-cart .cart-item-image{width:100%!important;height:100%!important;object-fit:cover;border:0!important}
 .rb-cart .cart-item-info-container{display:flex;flex-direction:column;justify-content:space-between;min-width:0;padding:0!important;width:auto!important}
@@ -426,9 +426,8 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 .rb-cart .cart-totals-total .js-cart-total,.rb-cart .cart-totals-total>*:last-child{font-size:19px!important;letter-spacing:0;font-weight:500;text-transform:none}
 .rb-cart .payment-discount-price-cart-container{font-size:11.5px!important;margin:-6px 0 12px!important;opacity:.7}
 .rb-cart .js-ajax-cart-submit .btn,.rb-cart .btn-primary{height:54px;border-radius:0!important;font-size:11px!important;letter-spacing:.28em;font-weight:600}
-.rb-cart-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 0;list-style:none;margin:12px 0 4px;padding:0}
+.rb-cart-trust{display:flex;flex-direction:column;align-items:center;gap:5px;list-style:none;margin:12px 0 4px;padding:0}
 .rb-cart-trust li{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
-.rb-cart-trust li+li:before{content:"·";margin:0 8px}
 .rb-cart .cart-continue-shopping{margin:6px 0 0!important;text-align:center}
 .rb-cart .cart-continue-shopping .btn{font-size:9.5px!important;letter-spacing:.2em;opacity:.6;padding:6px!important}
 /* carrito vacío */
