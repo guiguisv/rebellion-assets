@@ -454,3 +454,7 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 @keyframes rb-tabin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (max-width:767px){.rb-tabs{margin:0 -16px;padding:2px 16px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}}
 @media (prefers-reduced-motion:reduce){.rb-tabbed .rb-acc-item.rb-on{animation:none}}
+/* ficha: selector de cantidad alineado */
+.js-product-form .form-quantity .form-quantity-icon{display:flex!important;align-items:center;justify-content:center;height:100%;padding:0 16px!important;line-height:1!important}
+.js-product-form .form-quantity .form-quantity-icon svg{width:11px;height:11px}
+.js-product-form .js-quantity-input{text-align:center;font-size:14px!important;height:100%!important;line-height:normal}
