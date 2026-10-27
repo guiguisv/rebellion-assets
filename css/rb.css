@@ -516,3 +516,11 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 .rb-lb-more b{font-family:"Archivo",sans-serif;font-weight:300;font-size:clamp(20px,2.2vw,34px);letter-spacing:.02em;word-break:break-all}
 .rb-lb-more em{font-style:normal;font-size:26px}
 @media (max-width:767px){.rb-lb-p{grid-template-columns:40px 1fr;gap:8px;padding:6px}.rb-lb-p img{width:40px;height:40px}.rb-lb-p em{display:none}.rb-lb-p b{font-size:9.5px;letter-spacing:.14em}.rb-lb-p i{font-size:11px}}
+/* Rebel Style: ancho completo y sin estilos de texto de página */
+.rb-lb-page #ns-section-page_content .page-content,.rb-lb-page #ns-section-page_content .user-content{max-width:none!important;width:100%!important;padding:0!important;margin:0!important}
+.rb-lb a{text-decoration:none!important}
+.rb-lb h1,.rb-lb p{margin:0!important}
+.rb-lb-head{gap:14px!important}
+.rb-lb-title{line-height:.9!important}
+.rb-lb-more b{font-size:clamp(17px,1.7vw,26px);word-break:normal;overflow-wrap:anywhere}
+@media (max-width:767px){.rb-lb-more b{font-size:15px}}
