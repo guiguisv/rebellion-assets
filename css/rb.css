@@ -554,3 +554,4 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 @media (hover:hover){.rb-lb-card:hover .rb-lb-alt{opacity:1}}
 .rb-lb-soon{cursor:default;border-style:dashed!important}
 .rb-lb-soon em{opacity:.5}
+.rb-lb-media,.rb-lb-more{aspect-ratio:3/4!important}
