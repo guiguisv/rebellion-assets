@@ -524,3 +524,17 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 .rb-lb-title{line-height:.9!important}
 .rb-lb-more b{font-size:clamp(17px,1.7vw,26px);word-break:normal;overflow-wrap:anywhere}
 @media (max-width:767px){.rb-lb-more b{font-size:15px}}
+
+/* ===== v9 · celular: carruseles sin tantos puntitos ===== */
+/* los puntitos pasan a ser una línea fina dividida: el tramo negro es donde estás */
+.js-swiper-products-list-pagination.swiper-pagination{display:flex!important;position:static!important;width:auto!important;height:2px;margin:22px 0 0!important;padding:0!important;gap:0;transform:none!important;background:rgba(17,17,17,.1)}
+.js-swiper-products-list-pagination .swiper-pagination-bullet{flex:1 1 0;width:auto!important;height:2px!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;opacity:1!important;transition:background .4s var(--rb-ease)}
+.js-swiper-products-list-pagination .swiper-pagination-bullet-active{background:#111!important}
+@media (min-width:768px){.js-swiper-products-list-pagination.swiper-pagination{display:none!important}}
+@media (max-width:767px){
+  .section-featured-home{padding-top:36px!important;padding-bottom:40px!important}
+  .section-featured-home .d-flex.flex-column{gap:18px!important}
+  #ns-section-beneficios [data-store="banner-services"]{padding-top:40px!important;padding-bottom:40px!important}
+  #ns-section-beneficios .icon-text-group>div,#ns-section-beneficios .icon-text-group .row,#ns-section-beneficios .icon-text-group .icon-text-list{display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px 16px!important}
+  #ns-section-beneficios .icon-text-item{align-items:center!important;text-align:center}
+}
