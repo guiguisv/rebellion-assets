@@ -558,3 +558,6 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 /* nunca scroll horizontal en celular (clip no rompe el encabezado fijo) */
 html,body{overflow-x:clip}
 .rb-travel{max-width:100vw}
+/* el REBELLION que baja: siempre centrado y dentro de la pantalla */
+.rb-travel{left:0!important;right:0;width:100%;max-width:none;text-align:center;overflow:hidden;padding-left:.16em;box-sizing:border-box}
+@media (max-width:767px){.rb-hero-title{font-size:min(9.4vw,52px)!important}}
