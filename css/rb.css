@@ -538,3 +538,14 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
   #ns-section-beneficios .icon-text-group>div,#ns-section-beneficios .icon-text-group .row,#ns-section-beneficios .icon-text-group .icon-text-list{display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px 16px!important}
   #ns-section-beneficios .icon-text-item{align-items:center!important;text-align:center}
 }
+
+/* ===== v9b · mayorista con aire + newsletter prolijo ===== */
+#ns-section-mayorista .rich-text{gap:22px!important}
+#ns-section-mayorista .text-content{max-width:540px;margin:0 auto;line-height:1.7}
+#ns-section-mayorista .text-content em{display:block;margin:0 0 16px}
+#ns-section-mayorista .text-content br{display:none}
+#ns-section-mayorista .btn{margin-top:10px}
+#ns-section-newsletter .newsletter-form-wrapper{display:flex!important;align-items:stretch!important;width:min(460px,100%);margin:6px auto 0}
+#ns-section-newsletter .newsletter-form-input{flex:1 1 auto;height:52px!important;margin:0!important;border:1px solid #111!important;border-right:0!important;border-radius:0!important;padding:0 18px!important;font-size:14px!important}
+#ns-section-newsletter .newsletter-form-button{flex:0 0 auto;height:52px!important;margin:0!important;padding:0 28px!important;border:1px solid #111!important;border-radius:0!important;background:#111!important;color:#fff!important;font-size:10.5px!important;letter-spacing:.26em}
+#ns-section-newsletter .newsletter-form-button:hover{background:#333!important}

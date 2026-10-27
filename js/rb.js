@@ -78,7 +78,7 @@ function nav(){
   R.classList.add('rb-has-nav');
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
-var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:7,menu:'Cyber',anuncio:'Cyber Monday · 2, 3 y 4 de noviembre'};
+var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:7,menu:'Cyber',anuncio:'Cyber Rebellion · 2, 3 y 4 de noviembre'};
 function promo(){
   var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
   for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
@@ -92,7 +92,7 @@ function promo(){
     var half=[c.anuncio].concat(uniq);var full=[];while(full.length<8)full=full.concat(half);full=full.concat(full);
     tr.innerHTML=full.map(function(x){return '<span>'+x+'</span>';}).join('');}
   var cd=D.querySelector('[data-rb-cd]');
-  if(cd&&(phase==='pre'||phase==='cyber')){var tgt=phase==='pre'?a:b;cd.hidden=false;cd.querySelector('.rb-cd-l').textContent=phase==='pre'?'Cyber Monday empieza en':'Cyber Monday termina en';
+  if(cd&&(phase==='pre'||phase==='cyber')){var tgt=phase==='pre'?a:b;cd.hidden=false;cd.querySelector('.rb-cd-l').textContent=phase==='pre'?'Cyber Rebellion empieza en':'Cyber Rebellion termina en';
     var put=function(u,v){var e=cd.querySelector('[data-u="'+u+'"]');var t=(v<10?'0':'')+v;if(e&&e.textContent!==t){e.textContent=t;e.classList.remove('rb-tick');void e.offsetWidth;e.classList.add('rb-tick');}};
     var tick=function(){var s=Math.max(0,(tgt-Date.now())/1000|0);put('d',s/86400|0);put('h',(s%86400)/3600|0);put('m',(s%3600)/60|0);put('s',s%60);};tick();setInterval(tick,1000);}
 }
@@ -165,13 +165,13 @@ function deals(){
         var nm=cl((it.querySelector('.js-item-name')||{}).textContent),pr=cl((it.querySelector('.js-price-display')||{}).textContent);
         var cp=it.querySelector('.js-compare-price-display'),cpt=cp&&!/display:\s*none/.test(cp.getAttribute('style')||'')?cl(cp.textContent):'';
         var off='';if(cpt){var x=+cpt.replace(/\D/g,''),y=+pr.replace(/\D/g,'');if(x>y&&y)off='<em>-'+Math.round((1-y/x)*100)+'%</em>';}
-        return '<a class="rb-dcard" href="'+(a?a.getAttribute('href'):li.dataset.url)+'"><span class="rb-dcard-img"><img src="'+src+'" alt="'+nm+'" loading="lazy">'+off+'</span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span></a>';
+        return '<a class="rb-dcard" href="'+(a?a.getAttribute('href'):li.dataset.url)+'"><span class="rb-dcard-img"><img src="'+src+'" alt="'+nm+'" decoding="async">'+off+'</span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span></a>';
       }).join('');
       rail.innerHTML=html||'<p class="rb-deal-load">Muy pronto</p>';
     }).catch(function(){rail.dataset.ok='';rail.innerHTML='';});
   }
   function toggle(li,force){var open=force!==undefined?force:!li.classList.contains('rb-open');
-    [].forEach.call(list.querySelectorAll('.rb-deal.rb-open'),function(o){if(o!==li){o.classList.remove('rb-open');o.querySelector('.rb-deal-row').setAttribute('aria-expanded','false');}});
+    if(!W.matchMedia('(max-width:767px)').matches)[].forEach.call(list.querySelectorAll('.rb-deal.rb-open'),function(o){if(o!==li){o.classList.remove('rb-open');o.querySelector('.rb-deal-row').setAttribute('aria-expanded','false');}});
     li.classList.toggle('rb-open',open);li.querySelector('.rb-deal-row').setAttribute('aria-expanded',open?'true':'false');if(open)load(li);}
   [].forEach.call(list.querySelectorAll('.rb-deal'),function(li){li.querySelector('.rb-deal-row').addEventListener('click',function(){toggle(li);});});
   [].forEach.call(list.querySelectorAll('.rb-deal'),function(li){var r=li.querySelector('.rb-deal-rail'),a=li.querySelector('.rb-deal-all');if(!r)return;var bar=D.createElement('div');bar.className='rb-deal-bar';r.parentNode.insertBefore(bar,r.nextSibling);if(a)bar.appendChild(a);railNav(r,bar);});
@@ -179,7 +179,7 @@ function deals(){
   /* números que cuentan al entrar en pantalla */
   function count(el){var m=el.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||reduce)return;var to=+m[2],t0=null;
     function st(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1100),e=1-Math.pow(1-p,3);el.textContent=m[1]+Math.round(to*e)+m[3];if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
-  if('IntersectionObserver' in W){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);if(e.target.classList.contains('rb-deals')){if(first)toggle(first,true);}else count(e.target);}});},{threshold:.4});
+  if('IntersectionObserver' in W){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);if(e.target.classList.contains('rb-deals')){[].forEach.call(list.querySelectorAll('.rb-deal'),load);if(first)toggle(first,true);}else count(e.target);}});},{threshold:.4});
     [].forEach.call(list.querySelectorAll('.rb-deal-pct'),function(p){io2.observe(p);});io2.observe(list);}
   else if(first)toggle(first,true);
 }
