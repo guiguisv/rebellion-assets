@@ -129,6 +129,26 @@ function index(){
 }
 
 /* ---------- Sale interactivo: filas que cuentan y se abren con productos reales ---------- */
+/* ---------- Carriles horizontales: flechas en compu + arrastrar con el mouse ---------- */
+function railNav(rail,bar){
+  if(!rail||rail.dataset.nav)return;rail.dataset.nav='1';
+  var prev=D.createElement('button'),next=D.createElement('button');prev.type=next.type='button';
+  prev.className='rb-arr rb-arr-prev';next.className='rb-arr rb-arr-next';prev.setAttribute('aria-label','Anteriores');next.setAttribute('aria-label','Siguientes');
+  prev.innerHTML=next.innerHTML='<i></i>';
+  var nav=D.createElement('div');nav.className='rb-arrs';nav.appendChild(prev);nav.appendChild(next);(bar||rail.parentNode).appendChild(nav);
+  var step=function(){var c=rail.querySelector(':scope > *');return c?Math.max(c.getBoundingClientRect().width*2,rail.clientWidth*.8):rail.clientWidth*.8;};
+  prev.addEventListener('click',function(){rail.scrollBy({left:-step(),behavior:'smooth'});});
+  next.addEventListener('click',function(){rail.scrollBy({left:step(),behavior:'smooth'});});
+  var upd=function(){var max=rail.scrollWidth-rail.clientWidth-2;prev.disabled=rail.scrollLeft<=2;next.disabled=rail.scrollLeft>=max;nav.hidden=max<=2;};
+  rail.addEventListener('scroll',function(){requestAnimationFrame(upd);},{passive:true});W.addEventListener('resize',upd);
+  new MutationObserver(function(){setTimeout(upd,60);}).observe(rail,{childList:true});setTimeout(upd,60);
+  /* arrastrar con el mouse (en compu no hay deslizamiento) */
+  var down=false,x0=0,s0=0,moved=false;
+  rail.addEventListener('mousedown',function(e){down=true;moved=false;x0=e.pageX;s0=rail.scrollLeft;rail.classList.add('rb-grab');e.preventDefault();});
+  W.addEventListener('mousemove',function(e){if(!down)return;var dx=e.pageX-x0;if(Math.abs(dx)>4)moved=true;rail.scrollLeft=s0-dx;});
+  W.addEventListener('mouseup',function(){if(!down)return;down=false;rail.classList.remove('rb-grab');});
+  rail.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
+}
 function deals(){
   var list=D.querySelector('.rb-deals');if(!list)return;
   function cl(t){return (t||'').replace(/\s+/g,' ').trim().replace(/,00\b/g,'');}
@@ -154,6 +174,7 @@ function deals(){
     [].forEach.call(list.querySelectorAll('.rb-deal.rb-open'),function(o){if(o!==li){o.classList.remove('rb-open');o.querySelector('.rb-deal-row').setAttribute('aria-expanded','false');}});
     li.classList.toggle('rb-open',open);li.querySelector('.rb-deal-row').setAttribute('aria-expanded',open?'true':'false');if(open)load(li);}
   [].forEach.call(list.querySelectorAll('.rb-deal'),function(li){li.querySelector('.rb-deal-row').addEventListener('click',function(){toggle(li);});});
+  [].forEach.call(list.querySelectorAll('.rb-deal'),function(li){var r=li.querySelector('.rb-deal-rail'),a=li.querySelector('.rb-deal-all');if(!r)return;var bar=D.createElement('div');bar.className='rb-deal-bar';r.parentNode.insertBefore(bar,r.nextSibling);if(a)bar.appendChild(a);railNav(r,bar);});
   var first=list.querySelector('.rb-deal');
   /* números que cuentan al entrar en pantalla */
   function count(el){var m=el.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||reduce)return;var to=+m[2],t0=null;
@@ -294,6 +315,31 @@ function cart(){
   new MutationObserver(function(){if(m.classList.contains('modal-show')||m.style.display==='block')load();}).observe(m,{attributes:true,attributeFilter:['class','style']});
   sync();
 }
-function go(){nav();mnav();cart();promo();travel();index();deals();ficha();mark();}
+/* ---------- Página Rebel Style (/rebel-style/): grilla de looks desde looks.json ---------- */
+function lookbook(){
+  if(!/^\/rebel-style\/?$/.test(location.pathname))return;
+  var box=D.querySelector('#ns-section-page_content .page-content')||D.querySelector('.page-content.user-content');if(!box||box.querySelector('.rb-lb'))return;
+  R.classList.add('rb-lb-page');
+  var A='https://guiguisv.github.io/rebellion-assets/';
+  fetch(A+'looks/looks.json?v='+Date.now().toString(36).slice(0,-4)).then(function(r){return r.json();}).then(function(d){
+    var cards=(d.looks||[]).map(function(l){var m=l.media||{};
+      var media=m.video?'<video muted loop playsinline preload="none" poster="'+A+m.poster+'" data-src="'+A+m.video+'"></video>':'<img src="'+A+m.img+'" alt="" loading="lazy">';
+      return '<article class="rb-lb-card"><div class="rb-lb-media">'+media+'<span class="rb-lb-n">'+l.n+'</span></div><div class="rb-lb-shop"><small>En el look</small>'+
+        (l.products||[]).map(function(p){return '<a class="rb-lb-p" href="'+p.url+'"><img src="'+A+p.img+'" alt="" loading="lazy"><span><b>'+p.name+'</b><i>'+(p.sub||'')+'</i></span><em>Ver →</em></a>';}).join('')+'</div></article>';}).join('');
+    var mas=d.mas?'<a class="rb-lb-more" href="'+d.mas.url+'" target="_blank" rel="noopener"><span>'+d.mas.label+'</span><b>'+d.mas.user+'</b><em>→</em></a>':'';
+    box.innerHTML='<section class="rb-lb"><header class="rb-lb-head"><p class="rb-eyebrow">Verano 27</p><h1 class="rb-lb-title"><span>Rebel</span> <span>style</span></h1><p class="rb-lb-sub">Más ideas para tus looks.</p></header><div class="rb-lb-grid">'+cards+mas+'</div></section>';
+    var vids=[].slice.call(box.querySelectorAll('video[data-src]'));
+    var play=function(v,on){if(on){if(!v.src)v.src=v.dataset.src;v.play().catch(function(){});}else v.pause();};
+    if('IntersectionObserver' in W&&!reduce){var io=new IntersectionObserver(function(es){es.forEach(function(e){play(e.target,e.isIntersecting);});},{threshold:.35});vids.forEach(function(v){io.observe(v);});}
+  }).catch(function(){});
+}
+/* ---------- Portada en celular: los tres videos a la vez ---------- */
+function heroTri(){
+  var tri=D.querySelector('.rb-hero-tri');if(!tri)return;
+  var mq=W.matchMedia('(max-width:767px)');
+  var set=function(){[].forEach.call(tri.querySelectorAll('video'),function(v){if(mq.matches){if(!v.src){v.src=v.dataset.src;}v.play().catch(function(){});}else v.pause();});};
+  set();if(mq.addEventListener)mq.addEventListener('change',set);
+}
+function go(){nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();

@@ -1,0 +1,11 @@
+{
+  "looks": [
+    {"n": "01", "media": {"video": "reels/Ddum7VlxddI.mp4", "poster": "reels/poster/Ddum7VlxddI.jpg"},
+     "products": [{"name": "Vittoria", "sub": "Negro", "url": "/productos/vittoria-8000/", "img": "producto/8000-negro.jpg"}]},
+    {"n": "02", "media": {"video": "verano/look02.mp4", "poster": "verano/look02.jpg"},
+     "products": [{"name": "Verona", "sub": "Gamuza chocolate", "url": "/productos/verona-8002/", "img": "producto/8002-gamuza-chocolate.jpg"}]},
+    {"n": "03", "media": {"video": "reels/DPhDd-LEXse.mp4", "poster": "reels/poster/DPhDd-LEXse.jpg"},
+     "products": [{"name": "Luna", "sub": "Cartera", "url": "/productos/luna/", "img": "producto/luna-negro.jpg"}]}
+  ],
+  "mas": {"label": "Más looks en", "user": "@somosrebellion", "url": "https://www.instagram.com/somosrebellion/"}
+}
