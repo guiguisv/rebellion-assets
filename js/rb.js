@@ -323,9 +323,10 @@ function lookbook(){
   var A='https://guiguisv.github.io/rebellion-assets/';
   fetch(A+'looks/looks.json?v='+Date.now().toString(36).slice(0,-4)).then(function(r){return r.json();}).then(function(d){
     var cards=(d.looks||[]).map(function(l){var m=l.media||{};
-      var media=m.video?'<video muted loop playsinline preload="none" poster="'+A+m.poster+'" data-src="'+A+m.video+'"></video>':'<img src="'+A+m.img+'" alt="" loading="lazy">';
+      var media=m.video?'<video muted loop playsinline preload="none" poster="'+A+m.poster+'" data-src="'+A+m.video+'"></video>':'<img src="'+A+m.img+'" alt="" loading="lazy">'+(m.alt?'<img class="rb-lb-alt" src="'+A+m.alt+'" alt="" loading="lazy">':'');
       return '<article class="rb-lb-card"><div class="rb-lb-media">'+media+'<span class="rb-lb-n">'+l.n+'</span></div><div class="rb-lb-shop"><small>En el look</small>'+
-        (l.products||[]).map(function(p){return '<a class="rb-lb-p" href="'+p.url+'"><img src="'+A+p.img+'" alt="" loading="lazy"><span><b>'+p.name+'</b><i>'+(p.sub||'')+'</i></span><em>Ver →</em></a>';}).join('')+'</div></article>';}).join('');
+        (l.products||[]).map(function(p){var inner='<img src="'+A+p.img+'" alt="" loading="lazy"><span><b>'+p.name+'</b><i>'+(p.sub||'')+'</i></span>';
+          return p.url?'<a class="rb-lb-p" href="'+p.url+'">'+inner+'<em>Ver →</em></a>':'<div class="rb-lb-p rb-lb-soon">'+inner+'<em>Pronto</em></div>';}).join('')+'</div></article>';}).join('');
     var mas=d.mas?'<a class="rb-lb-more" href="'+d.mas.url+'" target="_blank" rel="noopener"><span>'+d.mas.label+'</span><b>'+d.mas.user+'</b><em>→</em></a>':'';
     box.innerHTML='<section class="rb-lb"><header class="rb-lb-head"><p class="rb-eyebrow">Verano 27</p><h1 class="rb-lb-title"><span>Rebel</span> <span>style</span></h1><p class="rb-lb-sub">Más ideas para tus looks.</p></header><div class="rb-lb-grid">'+cards+mas+'</div></section>';
     var vids=[].slice.call(box.querySelectorAll('video[data-src]'));

@@ -1,11 +1,159 @@
 {
-  "looks": [
-    {"n": "01", "media": {"video": "reels/Ddum7VlxddI.mp4", "poster": "reels/poster/Ddum7VlxddI.jpg"},
-     "products": [{"name": "Vittoria", "sub": "Negro", "url": "/productos/vittoria-8000/", "img": "producto/8000-negro.jpg"}]},
-    {"n": "02", "media": {"video": "verano/look02.mp4", "poster": "verano/look02.jpg"},
-     "products": [{"name": "Verona", "sub": "Gamuza chocolate", "url": "/productos/verona-8002/", "img": "producto/8002-gamuza-chocolate.jpg"}]},
-    {"n": "03", "media": {"video": "reels/DPhDd-LEXse.mp4", "poster": "reels/poster/DPhDd-LEXse.jpg"},
-     "products": [{"name": "Luna", "sub": "Cartera", "url": "/productos/luna/", "img": "producto/luna-negro.jpg"}]}
-  ],
-  "mas": {"label": "Más looks en", "user": "@somosrebellion", "url": "https://www.instagram.com/somosrebellion/"}
+ "looks": [
+  {
+   "n": "01",
+   "media": {
+    "video": "verano/look02.mp4",
+    "poster": "verano/look02.jpg"
+   },
+   "products": [
+    {
+     "name": "Verona",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/verona-8002/?variant=1623916677",
+     "img": "producto/8002-gamuza-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "02",
+   "media": {
+    "img": "looks/l04_a.jpg",
+    "alt": "looks/l04_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Vittoria",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/vittoria-8000/?variant=1623915781",
+     "img": "producto/8000-gamuza-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "03",
+   "media": {
+    "video": "looks/l09.mp4",
+    "poster": "looks/l09_v.jpg"
+   },
+   "products": [
+    {
+     "name": "Milano",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/milano-8500/?variant=1623916058",
+     "img": "producto/8500-gamuza-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "04",
+   "media": {
+    "img": "looks/l11_a.jpg",
+    "alt": "looks/l11_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Roma",
+     "sub": "Negro",
+     "url": "/productos/roma-8006/?variant=1623915991",
+     "img": "producto/8006-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "05",
+   "media": {
+    "img": "looks/l10_a.jpg",
+    "alt": "looks/l10_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Sienna",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/sienna-8004/?variant=1623915832",
+     "img": "producto/8004-gamuza-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "06",
+   "media": {
+    "img": "looks/l08_a.jpg",
+    "alt": "looks/l08_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Capri",
+     "sub": "Negro",
+     "url": "/productos/capri-8712/?variant=1623916439",
+     "img": "producto/8712-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "07",
+   "media": {
+    "img": "looks/l05_a.jpg",
+    "alt": "looks/l05_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Milano",
+     "sub": "Negro",
+     "url": "/productos/milano-8500/?variant=1623916050",
+     "img": "producto/8500-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "08",
+   "media": {
+    "img": "looks/l07_a.jpg",
+    "alt": "looks/l07_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Paris",
+     "sub": "Gamuza Negro",
+     "url": "/productos/paris-8702/?variant=1623916180",
+     "img": "producto/8702-gamuza-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "09",
+   "media": {
+    "img": "looks/l03_a.jpg",
+    "alt": "looks/l03_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Próximamente",
+     "sub": "Cebra",
+     "url": "",
+     "img": "producto/9000-cebra.jpg"
+    }
+   ]
+  },
+  {
+   "n": "10",
+   "media": {
+    "img": "looks/l12_a.jpg",
+    "alt": "looks/l12_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Próximamente",
+     "sub": "Negro",
+     "url": "",
+     "img": "producto/8003-negro.jpg"
+    }
+   ]
+  }
+ ],
+ "mas": {
+  "label": "Más looks en",
+  "user": "@somosrebellion",
+  "url": "https://www.instagram.com/somosrebellion/"
+ }
 }

@@ -549,3 +549,8 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 #ns-section-newsletter .newsletter-form-input{flex:1 1 auto;height:52px!important;margin:0!important;border:1px solid #111!important;border-right:0!important;border-radius:0!important;padding:0 18px!important;font-size:14px!important}
 #ns-section-newsletter .newsletter-form-button{flex:0 0 auto;height:52px!important;margin:0!important;padding:0 28px!important;border:1px solid #111!important;border-radius:0!important;background:#111!important;color:#fff!important;font-size:10.5px!important;letter-spacing:.26em}
 #ns-section-newsletter .newsletter-form-button:hover{background:#333!important}
+/* Rebel Style: foto de detalle al pasar el mouse + productos que todavía no salieron */
+.rb-lb-media .rb-lb-alt{opacity:0;transition:opacity .6s var(--rb-ease)}
+@media (hover:hover){.rb-lb-card:hover .rb-lb-alt{opacity:1}}
+.rb-lb-soon{cursor:default;border-style:dashed!important}
+.rb-lb-soon em{opacity:.5}
