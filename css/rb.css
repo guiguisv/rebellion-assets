@@ -555,3 +555,6 @@ html.rb-dr-open,html.rb-dr-open body{overflow:hidden}
 .rb-lb-soon{cursor:default;border-style:dashed!important}
 .rb-lb-soon em{opacity:.5}
 .rb-lb-media,.rb-lb-more{aspect-ratio:3/4!important}
+/* nunca scroll horizontal en celular (clip no rompe el encabezado fijo) */
+html,body{overflow-x:clip}
+.rb-travel{max-width:100vw}
