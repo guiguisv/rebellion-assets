@@ -561,3 +561,7 @@ html,body{overflow-x:clip}
 /* el REBELLION que baja: siempre centrado y dentro de la pantalla */
 .rb-travel{left:0!important;right:0;width:100%;max-width:none;text-align:center;overflow:hidden;padding-left:.16em;box-sizing:border-box}
 @media (max-width:767px){.rb-hero-title{font-size:min(9.4vw,52px)!important}}
+/* logo: siempre REBELLION en letras, aunque la tienda tenga un logo en imagen cargado */
+.logo-img-container img.logo-img{display:none!important}
+.logo-img-container a{display:inline-flex;align-items:center;text-decoration:none;color:inherit}
+.logo-img-container a::after{content:"REBELLION";display:inline-block;font-family:"Archivo",sans-serif;font-size:17px;font-weight:600;letter-spacing:.34em;line-height:1;color:currentColor;padding-left:.34em}
