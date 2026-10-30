@@ -242,7 +242,10 @@ function mnav(){
   var cats=[['New Drop','/new-drop/'],['Botas','/botas/',[['Ver todas','/botas/'],['Caña alta','/botas/botas-cana/'],['Botas sandalia','/botas-sandalia/']]],
     ['Texanas','/hasta-50-off/texanas/'],['Borcegos','/botas/borcegos/'],
     ['Sandalias','/sandalias/',[['Ver todas','/sandalias/'],['Plataformas','/sandalias/plataformas/'],['Flats','/sandalias/flats/'],['Taco','/sandalias/taco/'],['Taco chupete','/sandalias/taco-chupete/']]],
-    ['Mocasines','/mocasines/'],['Gangas','/gangas/']];
+    ['Mocasines','/mocasines/']];
+  /* Sale/Gangas solo durante el Cyber (hoy no hay nada con descuento) */
+  var now=Date.now(),cy=/rbpromo=cyber/.test(location.search)||(now>=Date.parse(PROMO.desde)&&now<Date.parse(PROMO.hasta));
+  if(cy)cats.push(['Cyber','/hasta-50-off/']);
   var help=[['Mi cuenta','/account/login/'],['Guía de talles','/guia-de-talles/'],['Cambios','/cambios-y-devoluciones/'],['Cómo comprar','/como-comprar/'],['Preguntas','/preguntas-frecuentes/'],['Contacto','/contacto/']];
   var path=location.pathname,n2=function(i){return(i<9?'0':'')+(i+1);};
   var li=cats.map(function(c,i){var cur=path.indexOf(c[1])===0?' rb-cur':'';
@@ -279,7 +282,7 @@ function cart(){
   var num=function(t){t=(t||'').replace(/[^\d,]/g,'').split(',')[0];return +t.replace(/\D/g,'')||0;};
   var title=m.querySelector('.modal-title');if(title)title.innerHTML='Tu carrito <small class="rb-cart-n"></small>';
   var ship=D.createElement('div');ship.className='rb-ship';ship.innerHTML='<p></p><span><i></i></span>';body.insertBefore(ship,body.firstChild);
-  if(empty)empty.insertAdjacentHTML('afterbegin','<div class="rb-cart-empty"><p>Tu carrito está vacío</p><div><a href="/new-drop/">New Drop</a><a href="/hasta-50-off/">Sale</a></div></div>');
+  if(empty)empty.insertAdjacentHTML('afterbegin','<div class="rb-cart-empty"><p>Tu carrito está vacío</p><div><a href="/new-drop/">New Drop</a><a href="/botas/">Botas</a></div></div>');
   var sug=D.createElement('div');sug.className='rb-sug';sug.innerHTML='<div class="rb-sug-bar"><p class="rb-sug-t">Completá tu look</p></div><div class="rb-sug-rail"></div>';
   (row||list).parentNode.insertBefore(sug,row||list.nextSibling);
   railNav(sug.querySelector('.rb-sug-rail'),sug.querySelector('.rb-sug-bar'));

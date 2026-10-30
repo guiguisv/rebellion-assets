@@ -602,3 +602,9 @@ button.header-utility{padding:12px!important;margin:-12px!important;box-sizing:c
 .rb-sug-rail.rb-grab a{pointer-events:none}
 .rb-sug-rail img{-webkit-user-drag:none;user-select:none}
 @media (max-width:767px){.rb-sug .rb-arrs{display:flex}.rb-sug .rb-arrs[hidden]{display:none}}
+
+/* ===== 30/10 · Sale fuera hasta el Cyber (sin productos con descuento): vuelve sola con .rb-cyber ===== */
+html:not(.rb-cyber) .rb-nav-sale,
+html:not(.rb-cyber) li:has(> a.rb-idx-row[href="/hasta-50-off/"]),
+html:not(.rb-cyber) #ns-section-rb_footer li:has(> a[href="/hasta-50-off/"]),
+html:not(.rb-cyber) #ns-section-rb_footer a[href="/hasta-50-off/"]{display:none!important}
