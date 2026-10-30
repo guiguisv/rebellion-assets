@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;600&display=swap" rel="stylesheet">
+<title>{{store_name}}</title>
+<style>
+  @media (max-width:620px){ .rb-pad{padding-left:20px!important;padding-right:20px!important} .rb-h1{font-size:24px!important} }
+  a{color:#111111}
+</style></head>
+<body style="margin:0;padding:0;background:#f6f4f1">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">Recibimos tu pedido. Te contamos los próximos pasos.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f4f1"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff">
+<tr><td align="center" style="background:#111111;padding:11px 16px;font:500 9px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffff">3 y 6 cuotas sin interés &nbsp;✦&nbsp; 20% off transferencia &nbsp;✦&nbsp; Envío gratis +$250.000</td></tr>
+<tr><td align="center" style="padding:30px 32px 26px;border-bottom:1px solid #e6e6e6">
+  <a href="https://rebellionshop.com.ar" style="text-decoration:none"><img src="https://guiguisv.github.io/rebellion-assets/img/mail_logo.png" width="190" alt="REBELLION" style="display:block;width:190px;max-width:60%;height:auto;border:0"></a>
+</td></tr>
+<tr><td class="rb-pad" style="padding:40px 32px 0">
+  <p style="margin:0 0 14px;font:500 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#6b6b6b">Pedido #{{order.id}}</p>
+  <h1 class="rb-h1" style="margin:0;font:300 30px/1.12 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#111111">¡Gracias por<br>tu compra!</h1>
+</td></tr>
+<tr><td class="rb-pad" style="padding:22px 32px 0;font:400 15px/1.65 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Recibimos tu pedido en {{store_name}}. Te vamos a avisar por mail cuando se confirme el pago y cuando lo despachemos.</td></tr>{% if order.discountGateway > 0 %}
+<tr><td class="rb-pad" style="padding:28px 32px 0">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f4f1"><tr><td style="padding:22px 24px;font:400 14px/1.7 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">
+    <p style="margin:0 0 10px;font:600 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase">Para pagar por transferencia</p>
+    Transferí el total del pedido a:<br>
+    <b>Alias:</b> rebellionshop<br>
+    <b>CVU:</b> 0000003100194993166655 (Mercado Pago)<br>
+    <b>Titular:</b> Melody Mariana Giuliano · CUIT 27-36154722-0<br><br>
+    Después mandanos el comprobante a <a href="mailto:tiendas@rebellionshop.com.ar" style="color:#111111;font-weight:600">tiendas@rebellionshop.com.ar</a> con tu número de pedido (#{{order.id}}).
+    Cuando se acredite, preparamos tu envío.
+  </td></tr></table></td></tr>
+{% endif %}<tr><td class="rb-pad" style="padding:34px 32px 0"><div style="padding-bottom:10px;border-bottom:1px solid #111111;font:600 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#111111">Tu pedido</div></td></tr><tr><td class="rb-pad" style="padding:0 32px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+{% for item in order.items %}
+<tr>
+  <td style="padding:16px 0;border-bottom:1px solid #e6e6e6;font:400 14px/1.5 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111" valign="top">
+    {% if item.is_kit %}
+      <b style="font-weight:600;letter-spacing:.08em;text-transform:uppercase">{{ item.name }}</b> <span style="color:#6b6b6b">× {{ item.quantity }}</span>
+      {% for component in item.components %}<div style="font:400 12px/1.5 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#6b6b6b">{{ component.name }} {{ component.variationName }} × {{ component.total_quantity }}</div>{% endfor %}
+    {% else %}
+      <b style="font-weight:600;letter-spacing:.08em;text-transform:uppercase">{{ item.name }}</b>{% if item.is_gift %} <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6b6b6b">· Regalo</span>{% endif %}
+      <div style="font:400 12px/1.5 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#6b6b6b">{{ item.variationName }} · Cantidad {{ item.quantity }}</div>
+    {% endif %}
+  </td>
+  <td align="right" valign="top" style="padding:16px 0;border-bottom:1px solid #e6e6e6;font:400 14px/1.5 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">{{ item.priceFormat }}</td>
+</tr>
+{% endfor %}
+</table></td></tr><tr><td class="rb-pad" style="padding:8px 32px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+{% for promotion in order.promotional_discount.promotions_applied %}
+<tr><td style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Promoción{% if promotion.scope_value_name and not promotion.is_cart_discount %} · {{ promotion.scope_value_name }}{% endif %}</td><td align="right" style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">-{{promotion.total_discount_amount_short}}</td></tr>
+{% endfor %}
+{% if order.shipping_pickup_type != 'non-shippable' and order.show_shipping_price %}
+<tr><td style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Envío</td><td align="right" style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">{% if order.shipping == 0 %}Gratis{% else %}{{order.shippingFormat}}{% endif %}</td></tr>
+{% endif %}
+{% if order.discountCoupon > 0 %}<tr><td style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Cupón {{order.coupon}}</td><td align="right" style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">-{{order.discountCouponFormat}}</td></tr>{% endif %}
+{% if order.discountGateway > 0 %}<tr><td style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Descuento {{order.paymentMethod}}</td><td align="right" style="padding:7px 0 7px;font:400 14px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">-{{order.discountGatewayFormat}}</td></tr>{% endif %}
+<tr><td style="padding:14px 0 7px;border-top:1px solid #111111;font:600 16px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">Total</td><td align="right" style="padding:14px 0 7px;border-top:1px solid #111111;font:600 16px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111;white-space:nowrap">{{order.totalFormat}}</td></tr>
+</table></td></tr>{% if order.shipping_pickup_type == 'ship' %}<tr><td class="rb-pad" style="padding:34px 32px 0"><div style="padding-bottom:10px;border-bottom:1px solid #111111;font:600 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#111111">Lo enviamos a</div></td></tr><tr><td class="rb-pad" style="padding:14px 32px 0;font:400 14px/1.65 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">{{order.shipping_address}}{% if order.shipping_floor %}, {{order.shipping_floor}}{% endif %}<br>{% if order.shipping_locality %}{{order.shipping_locality}}, {% endif %}{{order.shipping_city}} ({{order.shipping_zipcode}})<br>{{order.shipping_province}}, {{order.shipping_country}}</td></tr>
+{% elseif order.shipping_pickup_type == 'pickup' and order.shipping_extra.store_branch %}<tr><td class="rb-pad" style="padding:34px 32px 0"><div style="padding-bottom:10px;border-bottom:1px solid #111111;font:600 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#111111">Lo retirás en</div></td></tr><tr><td class="rb-pad" style="padding:14px 32px 0;font:400 14px/1.65 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">{{ order.shipping_extra.store_branch.name }}<br>{{ order.shipping_extra.store_branch.extra }}</td></tr>
+{% elseif order.shipping_option %}<tr><td class="rb-pad" style="padding:34px 32px 0"><div style="padding-bottom:10px;border-bottom:1px solid #111111;font:600 10px/1.4 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#111111">Entrega</div></td></tr><tr><td class="rb-pad" style="padding:14px 32px 0;font:400 14px/1.65 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#111111">{{ order.shipping_option }}</td></tr>{% endif %}{% if order.statusPageUrl %}<tr><td class="rb-pad" style="padding:30px 32px 0">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#111111">
+    <a href="{{ order.statusPageUrl }}" style="display:block;padding:17px 20px;font:600 12px/1 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#ffffff;text-decoration:none">Ver mi pedido</a>
+  </td></tr></table></td></tr>{% endif %}
+
+<tr><td class="rb-pad" style="padding:30px 32px 8px;font:400 13px/1.6 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#6b6b6b">
+  ¿Dudas con tu pedido o con el talle? Escribinos por <a href="https://wa.me/5491160461320" style="color:#111111;font-weight:600">WhatsApp al 11 6046-1320</a>
+  o a <a href="mailto:tiendas@rebellionshop.com.ar" style="color:#111111;font-weight:600">tiendas@rebellionshop.com.ar</a>.
+</td></tr>
+<tr><td align="center" style="padding:28px 32px 34px">
+  <p style="margin:0 0 10px;font:500 10px/1.6 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#111111">
+    <a href="https://rebellionshop.com.ar" style="color:#111111;text-decoration:none">Tienda</a> &nbsp;·&nbsp;
+    <a href="https://www.instagram.com/somosrebellion/" style="color:#111111;text-decoration:none">Instagram</a> &nbsp;·&nbsp;
+    <a href="https://rebellionshop.com.ar/cambios-y-devoluciones/" style="color:#111111;text-decoration:none">Cambios</a></p>
+  <p style="margin:0;font:400 11px/1.6 'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;color:#6b6b6b">{{store_name}} · Calzado de mujer hecho en Argentina</p>
+</td></tr>
+</table></td></tr></table></body></html>
