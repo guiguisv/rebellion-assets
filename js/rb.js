@@ -285,7 +285,7 @@ function cart(){
   railNav(sug.querySelector('.rb-sug-rail'),sug.querySelector('.rb-sug-bar'));
   // el calculador de envío no va en el pie fijo: con las opciones abiertas tapaba el carrito y dejaba "Iniciar compra" fuera de pantalla
   var moveShip=function(){var r=m.querySelector('.cart-row'),fi=r&&r.querySelector(':scope > .js-fulfillment-info');if(fi)sug.parentNode.insertBefore(fi,sug);};moveShip();
-  if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
+  if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>2, 3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
   function sync(){moveShip();
     var items=[].slice.call(list.querySelectorAll('.js-cart-item')),q=0;
     items.forEach(function(it){var i=it.querySelector('.js-cart-quantity-input');q+=i?(+i.value||1):1;
