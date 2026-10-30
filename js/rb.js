@@ -274,6 +274,13 @@ function mnav(){
 }
 /* ---------- Carrito: encabezado, barra de envío gratis, sugerencias y total fijo abajo ---------- */
 var ENVIO_GRATIS=250000;
+/* la línea "Envío gratis" de la barra de anuncios se actualiza con lo que hay en el carrito (null = carrito vacío) */
+var envioUlt=null;
+function envioLinea(falta){envioUlt=falta;var m$=function(n){return '$'+Math.round(n).toLocaleString('es-AR');};
+  var tx=falta===null?'Envío gratis desde '+m$(ENVIO_GRATIS):(falta?'Te faltan '+m$(falta)+' para el envío gratis':'¡Ya tenés envío gratis!');
+  [].forEach.call(D.querySelectorAll('.rb-marquee-track span, .navigation-bar .announcement'),function(s){
+    if(!s.dataset.rbEnvio&&!/env[ií]o gratis/i.test(s.textContent))return;s.dataset.rbEnvio='1';if(s.textContent!==tx)s.textContent=tx;});}
+setTimeout(function(){envioLinea(envioUlt);},1200);
 function cart(){
   var m=D.getElementById('modal-cart');if(!m||m.classList.contains('rb-cart'))return;m.classList.add('rb-cart');
   var body=m.querySelector('.modal-body'),list=m.querySelector('.js-ajax-cart-list'),empty=m.querySelector('.js-empty-ajax-cart'),row=m.querySelector('.cart-row');
@@ -288,7 +295,7 @@ function cart(){
   railNav(sug.querySelector('.rb-sug-rail'),sug.querySelector('.rb-sug-bar'));
   // el calculador de envío no va en el pie fijo: con las opciones abiertas tapaba el carrito y dejaba "Iniciar compra" fuera de pantalla
   var moveShip=function(){var r=m.querySelector('.cart-row'),fi=r&&r.querySelector(':scope > .js-fulfillment-info');if(fi)sug.parentNode.insertBefore(fi,sug);};moveShip();
-  if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>2, 3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
+  if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
   function sync(){moveShip();
     var items=[].slice.call(list.querySelectorAll('.js-cart-item')),q=0;
     items.forEach(function(it){var i=it.querySelector('.js-cart-quantity-input');q+=i?(+i.value||1):1;
@@ -302,6 +309,7 @@ function cart(){
     if(!items.length||!tot){ship.hidden=true;}else{ship.hidden=false;var f=Math.max(0,ENVIO_GRATIS-tot);
       var ph=f?'Te faltan <b>'+money(f)+'</b> para el envío gratis':'<b>¡Tenés envío gratis!</b>';if(p.innerHTML!==ph)p.innerHTML=ph;ship.classList.toggle('rb-ok',!f);
       ship.querySelector('i').style.width=Math.min(100,tot/ENVIO_GRATIS*100)+'%';}
+    envioLinea(items.length&&tot?Math.max(0,ENVIO_GRATIS-tot):null);
     var st=sug.querySelector('.rb-sug-t'),stt=items.length?'Completá tu look':'Te puede gustar';if(st.textContent!==stt)st.textContent=stt;
     var inCart=items.map(function(it){var a=it.querySelector('a[href*="/productos/"]');return a?a.pathname:'';});
     [].forEach.call(sug.querySelectorAll('.rb-scard'),function(c){c.hidden=inCart.indexOf(c.pathname)>-1;});
