@@ -290,7 +290,7 @@ function cart(){
     [].forEach.call(m.querySelectorAll('.js-cart-total,.js-ajax-cart-total,.js-cart-item-subtotal,.cart-compare-price-container span,.js-payment-discount-price-cart'),function(e){if(e.children.length)return;var t=e.textContent;if(/,00\b/.test(t))e.textContent=t.replace(/,00\b/g,'');});
     var n=m.querySelector('.rb-cart-n'),nt=q?'('+q+')':'';if(n&&n.textContent!==nt)n.textContent=nt;
     m.classList.toggle('rb-cart-vacio',!items.length);
-    var tot=num((m.querySelector('.js-cart-total')||m.querySelector('.js-ajax-cart-total')||{}).textContent),p=ship.querySelector('p');
+    var tot=num((m.querySelector('.js-cart-subtotal')||m.querySelector('.js-cart-total')||m.querySelector('.js-ajax-cart-total')||{}).textContent),p=ship.querySelector('p');
     if(!items.length||!tot){ship.hidden=true;}else{ship.hidden=false;var f=Math.max(0,ENVIO_GRATIS-tot);
       var ph=f?'Te faltan <b>'+money(f)+'</b> para el envío gratis':'<b>¡Tenés envío gratis!</b>';if(p.innerHTML!==ph)p.innerHTML=ph;ship.classList.toggle('rb-ok',!f);
       ship.querySelector('i').style.width=Math.min(100,tot/ENVIO_GRATIS*100)+'%';}
