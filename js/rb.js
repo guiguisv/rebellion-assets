@@ -360,6 +360,14 @@ function waDuda(){
   a.style.cssText='display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 20px;padding:12px 16px;border:1px solid rgba(17,17,17,.2);color:#111;text-decoration:none;font-size:13px;letter-spacing:.02em';
   pa.insertAdjacentElement('afterend',a);
 }
-function go(){nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();waDuda();}
+/* ---------- Videos debajo de la primera pantalla: se cargan al acercarse (velocidad) ---------- */
+function lazyVid(){
+  var vs=[].slice.call(D.querySelectorAll('.rb-look2-media video[data-src]'));if(!vs.length)return;
+  var load=function(v){if(v.getAttribute('src'))return;v.src=v.dataset.src;v.play&&v.play().catch(function(){});};
+  if(!('IntersectionObserver' in W)){vs.forEach(load);return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){load(e.target);io.unobserve(e.target);}});},{rootMargin:'600px 0px'});
+  vs.forEach(function(v){io.observe(v);});
+}
+function go(){nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();waDuda();lazyVid();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
