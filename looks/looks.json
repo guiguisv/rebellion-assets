@@ -8,9 +8,9 @@
    },
    "products": [
     {
-     "name": "Verona",
-     "sub": "Gamuza Chocolate",
-     "url": "/productos/verona-8002/?variant=1628346623",
+     "name": "Próximamente",
+     "sub": "Verona gamuza chocolate",
+     "url": "",
      "img": "producto/8002-gamuza-chocolate.jpg"
     }
    ]
@@ -23,9 +23,9 @@
    },
    "products": [
     {
-     "name": "Vittoria",
-     "sub": "Gamuza Chocolate",
-     "url": "/productos/vittoria-8000/?variant=1628345183",
+     "name": "Próximamente",
+     "sub": "Vittoria gamuza chocolate",
+     "url": "",
      "img": "producto/8000-gamuza-chocolate.jpg"
     }
    ]
@@ -53,9 +53,9 @@
    },
    "products": [
     {
-     "name": "Roma",
-     "sub": "Negro",
-     "url": "/productos/roma-8006/?variant=1628345579",
+     "name": "Próximamente",
+     "sub": "Roma negro",
+     "url": "",
      "img": "producto/8006-negro.jpg"
     }
    ]
@@ -68,9 +68,9 @@
    },
    "products": [
     {
-     "name": "Sienna",
-     "sub": "Gamuza Chocolate",
-     "url": "/productos/sienna-8004/?variant=1628345329",
+     "name": "Próximamente",
+     "sub": "Sienna gamuza chocolate",
+     "url": "",
      "img": "producto/8004-gamuza-chocolate.jpg"
     }
    ]
