@@ -587,6 +587,6 @@ button.header-utility{padding:12px!important;margin:-12px!important;box-sizing:c
 .page-header-title{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
 @media (max-width:767px){
 .page-header-title-inner{grid-template-columns:minmax(0,1fr)!important;row-gap:10px}
-.page-header-title-inner>*:not(.page-header-title){justify-self:start;text-align:left}
+.page-header-title-inner>*:not(.page-header-title){justify-self:start;text-align:left;margin-left:0!important}
 .page-header-title{font-size:min(40px,9.6vw)!important}
 }
