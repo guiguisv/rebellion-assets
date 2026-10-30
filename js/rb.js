@@ -137,8 +137,10 @@ function railNav(rail,bar){
   prev.innerHTML=next.innerHTML='<i></i>';
   var nav=D.createElement('div');nav.className='rb-arrs';nav.appendChild(prev);nav.appendChild(next);(bar||rail.parentNode).appendChild(nav);
   var step=function(){var c=rail.querySelector(':scope > *');return c?Math.max(c.getBoundingClientRect().width*2,rail.clientWidth*.8):rail.clientWidth*.8;};
-  prev.addEventListener('click',function(){rail.scrollBy({left:-step(),behavior:'smooth'});});
-  next.addEventListener('click',function(){rail.scrollBy({left:step(),behavior:'smooth'});});
+  /* si el navegador no anima el scroll suave (snap obligatorio, pestaña en segundo plano), se mueve igual */
+  var go=function(d){var x=rail.scrollLeft;rail.scrollBy({left:d,behavior:'smooth'});setTimeout(function(){if(Math.abs(rail.scrollLeft-x)<2)rail.scrollBy({left:d});},450);};
+  prev.addEventListener('click',function(){go(-step());});
+  next.addEventListener('click',function(){go(step());});
   var upd=function(){var max=rail.scrollWidth-rail.clientWidth-2;prev.disabled=rail.scrollLeft<=2;next.disabled=rail.scrollLeft>=max;nav.hidden=max<=2;};
   rail.addEventListener('scroll',function(){requestAnimationFrame(upd);},{passive:true});W.addEventListener('resize',upd);
   new MutationObserver(function(){setTimeout(upd,60);}).observe(rail,{childList:true});setTimeout(upd,60);
