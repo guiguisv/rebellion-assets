@@ -608,3 +608,6 @@ html:not(.rb-cyber) .rb-nav-sale,
 html:not(.rb-cyber) li:has(> a.rb-idx-row[href="/hasta-50-off/"]),
 html:not(.rb-cyber) #ns-section-rb_footer li:has(> a[href="/hasta-50-off/"]),
 html:not(.rb-cyber) #ns-section-rb_footer a[href="/hasta-50-off/"]{display:none!important}
+
+/* ===== 30/10 · filas de totales que Tienda Nube oculta (cupón sin usar): respetar su display:none ===== */
+.rb-cart .cart-totals-row[style*="display:none"],.rb-cart .cart-totals-row[style*="display: none"]{display:none!important}
