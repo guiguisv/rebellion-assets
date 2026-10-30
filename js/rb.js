@@ -278,6 +278,8 @@ function cart(){
   if(empty)empty.insertAdjacentHTML('afterbegin','<div class="rb-cart-empty"><p>Tu carrito está vacío</p><div><a href="/new-drop/">New Drop</a><a href="/hasta-50-off/">Sale</a></div></div>');
   var sug=D.createElement('div');sug.className='rb-sug';sug.innerHTML='<p class="rb-sug-t">Completá tu look</p><div class="rb-sug-rail"></div>';
   (row||list).parentNode.insertBefore(sug,row||list.nextSibling);
+  // el calculador de envío no va en el pie fijo: con las opciones abiertas tapaba el carrito y dejaba "Iniciar compra" fuera de pantalla
+  var fi=row&&row.querySelector('.js-fulfillment-info');if(fi)sug.parentNode.insertBefore(fi,sug);
   if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
   function sync(){
     var items=[].slice.call(list.querySelectorAll('.js-cart-item')),q=0;
