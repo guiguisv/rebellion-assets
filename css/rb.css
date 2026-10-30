@@ -590,3 +590,15 @@ button.header-utility{padding:12px!important;margin:-12px!important;box-sizing:c
 .page-header-title-inner>*:not(.page-header-title){justify-self:start;text-align:left;margin-left:0!important}
 .page-header-title{font-size:min(40px,9.6vw)!important}
 }
+
+/* ===== 30/10 · flechas en "Completá tu look" del carrito ===== */
+.rb-sug-bar{display:flex;align-items:center;gap:12px;padding-right:20px;margin:0 0 14px}
+.rb-sug-bar .rb-sug-t{margin:0}
+.rb-sug .rb-arr{width:34px;height:34px}
+.rb-sug .rb-arr i{width:8px;height:8px}
+.rb-sug .rb-arr:hover:not(:disabled){background:#111;color:#fff}
+.rb-sug-rail{cursor:grab}
+.rb-sug-rail.rb-grab{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.rb-sug-rail.rb-grab a{pointer-events:none}
+.rb-sug-rail img{-webkit-user-drag:none;user-select:none}
+@media (max-width:767px){.rb-sug .rb-arrs{display:flex}.rb-sug .rb-arrs[hidden]{display:none}}

@@ -144,6 +144,8 @@ function railNav(rail,bar){
   var upd=function(){var max=rail.scrollWidth-rail.clientWidth-2;prev.disabled=rail.scrollLeft<=2;next.disabled=rail.scrollLeft>=max;nav.hidden=max<=2;};
   rail.addEventListener('scroll',function(){requestAnimationFrame(upd);},{passive:true});W.addEventListener('resize',upd);
   new MutationObserver(function(){setTimeout(upd,60);}).observe(rail,{childList:true});setTimeout(upd,60);
+  /* el carrito arranca oculto: al abrirse cambia de tamaño y recién ahí se sabe si hacen falta flechas */
+  if(W.ResizeObserver)new ResizeObserver(function(){upd();}).observe(rail);
   /* arrastrar con el mouse (en compu no hay deslizamiento) */
   var down=false,x0=0,s0=0,moved=false;
   rail.addEventListener('mousedown',function(e){down=true;moved=false;x0=e.pageX;s0=rail.scrollLeft;rail.classList.add('rb-grab');e.preventDefault();});
@@ -278,8 +280,9 @@ function cart(){
   var title=m.querySelector('.modal-title');if(title)title.innerHTML='Tu carrito <small class="rb-cart-n"></small>';
   var ship=D.createElement('div');ship.className='rb-ship';ship.innerHTML='<p></p><span><i></i></span>';body.insertBefore(ship,body.firstChild);
   if(empty)empty.insertAdjacentHTML('afterbegin','<div class="rb-cart-empty"><p>Tu carrito está vacío</p><div><a href="/new-drop/">New Drop</a><a href="/hasta-50-off/">Sale</a></div></div>');
-  var sug=D.createElement('div');sug.className='rb-sug';sug.innerHTML='<p class="rb-sug-t">Completá tu look</p><div class="rb-sug-rail"></div>';
+  var sug=D.createElement('div');sug.className='rb-sug';sug.innerHTML='<div class="rb-sug-bar"><p class="rb-sug-t">Completá tu look</p></div><div class="rb-sug-rail"></div>';
   (row||list).parentNode.insertBefore(sug,row||list.nextSibling);
+  railNav(sug.querySelector('.rb-sug-rail'),sug.querySelector('.rb-sug-bar'));
   // el calculador de envío no va en el pie fijo: con las opciones abiertas tapaba el carrito y dejaba "Iniciar compra" fuera de pantalla
   var moveShip=function(){var r=m.querySelector('.cart-row'),fi=r&&r.querySelector(':scope > .js-fulfillment-info');if(fi)sug.parentNode.insertBefore(fi,sug);};moveShip();
   if(row){var sub=row.querySelector('.cart-continue-shopping');if(sub)sub.insertAdjacentHTML('beforebegin','<ul class="rb-cart-trust"><li>3 y 6 cuotas sin interés</li><li>20% off con transferencia</li><li>Cambios dentro de los 30 días</li></ul>');}
