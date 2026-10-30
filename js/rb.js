@@ -78,7 +78,7 @@ function nav(){
   R.classList.add('rb-has-nav');
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
-var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:7,menu:'Cyber',anuncio:'Cyber Rebellion · 2, 3 y 4 de noviembre'};
+var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · 2, 3 y 4 de noviembre'};
 function promo(){
   var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
   for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
