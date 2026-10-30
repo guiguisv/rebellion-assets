@@ -583,3 +583,10 @@ button.header-utility{padding:12px!important;margin:-12px!important;box-sizing:c
 .category-sort-button-text::before{letter-spacing:.14em}
 .category-filter-button .category-controls-label{letter-spacing:.14em}
 }
+/* QA 30/10: títulos grandes de categoría y búsqueda sin cortar palabras en celular */
+.page-header-title{overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+@media (max-width:767px){
+.page-header-title-inner{grid-template-columns:minmax(0,1fr)!important;row-gap:10px}
+.page-header-title-inner>*:not(.page-header-title){justify-self:start;text-align:left}
+.page-header-title{font-size:min(40px,9.6vw)!important}
+}
