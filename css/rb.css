@@ -567,7 +567,7 @@ html,body{overflow-x:clip}
 .logo-img-container a::after{content:"REBELLION";display:inline-block;font-family:"Archivo",sans-serif;font-size:17px;font-weight:600;letter-spacing:.34em;line-height:1;color:currentColor;padding-left:.34em}
 /* QA 30/10: carrito, celular angosto y áreas de toque */
 .rb-cart .js-fulfillment-info{padding:16px 20px!important;border-top:1px solid rgba(17,17,17,.1)}
-.rb-cart .cart-row{max-height:88vh;overflow-y:auto}
+.rb-cart .cart-row{flex:0 0 auto}
 .rb-ctr3{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important}
 .category-controls button.category-filter-button,.category-controls button.category-sort-button{min-width:0;white-space:nowrap}
 @media (max-width:767px){
