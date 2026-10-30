@@ -3,30 +3,30 @@
   {
    "n": "01",
    "media": {
-    "img": "looks/l13_a.jpg",
-    "alt": "looks/l13_b.jpg"
+    "video": "verano/look02.mp4",
+    "poster": "verano/look02.jpg"
    },
    "products": [
     {
-     "name": "Ibiza",
-     "sub": "Negro",
-     "url": "/productos/ibiza/?variant=1628352048",
-     "img": "producto/906-negro.jpg"
+     "name": "Verona",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/verona-8002/?variant=1628346635",
+     "img": "producto/8002-gamuza-chocolate.jpg"
     }
    ]
   },
   {
    "n": "02",
    "media": {
-    "img": "looks/l14_a.jpg",
-    "alt": "looks/l14_b.jpg"
+    "img": "looks/l04_a.jpg",
+    "alt": "looks/l04_b.jpg"
    },
    "products": [
     {
-     "name": "Rider",
+     "name": "Vittoria",
      "sub": "Gamuza Chocolate",
-     "url": "/productos/rider/?variant=1628386181",
-     "img": "producto/4016-gamuza-chocolate.jpg"
+     "url": "/productos/vittoria-8000/?variant=1628345191",
+     "img": "producto/8000-gamuza-chocolate.jpg"
     }
    ]
   },
@@ -48,30 +48,30 @@
   {
    "n": "04",
    "media": {
-    "img": "looks/l15_a.jpg",
-    "alt": "looks/l15_b.jpg"
+    "img": "looks/l11_a.jpg",
+    "alt": "looks/l11_b.jpg"
    },
    "products": [
     {
-     "name": "Medusa",
-     "sub": "Chocolate",
-     "url": "/productos/medusa/?variant=1628390474",
-     "img": "producto/420-chocolate.jpg"
+     "name": "Roma",
+     "sub": "Negro",
+     "url": "/productos/roma-8006/?variant=1628345588",
+     "img": "producto/8006-negro.jpg"
     }
    ]
   },
   {
    "n": "05",
    "media": {
-    "img": "looks/l16_a.jpg",
-    "alt": "looks/l16_b.jpg"
+    "img": "looks/l10_a.jpg",
+    "alt": "looks/l10_b.jpg"
    },
    "products": [
     {
-     "name": "Raven",
-     "sub": "Leopardo",
-     "url": "/productos/raven-702/?variant=1628334890",
-     "img": "producto/702-leopardo.jpg"
+     "name": "Sienna",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/sienna-8004/?variant=1628345335",
+     "img": "producto/8004-gamuza-chocolate.jpg"
     }
    ]
   },
@@ -147,6 +147,66 @@
      "sub": "Negro",
      "url": "/productos/bahia-422/?variant=1629648552",
      "img": "producto/422-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "11",
+   "media": {
+    "img": "looks/l13_a.jpg",
+    "alt": "looks/l13_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Ibiza",
+     "sub": "Negro",
+     "url": "/productos/ibiza/?variant=1628352048",
+     "img": "producto/906-negro.jpg"
+    }
+   ]
+  },
+  {
+   "n": "12",
+   "media": {
+    "img": "looks/l14_a.jpg",
+    "alt": "looks/l14_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Rider",
+     "sub": "Gamuza Chocolate",
+     "url": "/productos/rider/?variant=1628386181",
+     "img": "producto/4016-gamuza-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "13",
+   "media": {
+    "img": "looks/l15_a.jpg",
+    "alt": "looks/l15_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Medusa",
+     "sub": "Chocolate",
+     "url": "/productos/medusa/?variant=1628390474",
+     "img": "producto/420-chocolate.jpg"
+    }
+   ]
+  },
+  {
+   "n": "14",
+   "media": {
+    "img": "looks/l16_a.jpg",
+    "alt": "looks/l16_b.jpg"
+   },
+   "products": [
+    {
+     "name": "Raven",
+     "sub": "Leopardo",
+     "url": "/productos/raven-702/?variant=1628334890",
+     "img": "producto/702-leopardo.jpg"
     }
    ]
   }
