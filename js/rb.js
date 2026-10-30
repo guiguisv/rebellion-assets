@@ -235,11 +235,10 @@ function mark(){var m=D.querySelector('.rb-mark');if(!m)return;if(reduce||!('Int
 function mnav(){
   if(D.querySelector('.rb-drawer'))return;
   var IMG='https://guiguisv.github.io/rebellion-assets/img/';
-  var cats=[['New Drop','/new-drop/'],['Botas','/botas/',[['Ver todas','/botas/'],['Caña alta','/botas/botas-cana/'],['Taco chupete','/botas/botas-taco-chupete/'],['Botas sandalia','/botas-sandalia/']]],
+  var cats=[['New Drop','/new-drop/'],['Botas','/botas/',[['Ver todas','/botas/'],['Caña alta','/botas/botas-cana/'],['Botas sandalia','/botas-sandalia/']]],
     ['Texanas','/hasta-50-off/texanas/'],['Borcegos','/botas/borcegos/'],
-    ['Sandalias','/sandalias/',[['Ver todas','/sandalias/'],['Plataformas','/sandalias/plataformas/'],['Flats','/sandalias/flats/'],['Taco','/sandalias/taco/'],['Taco chupete','/sandalias/taco-chupete/'],['Taco chino','/sandalias/taco-chino/']]],
-    ['Mocasines','/mocasines/'],['Accesorios','/accesorios/',[['Ver todos','/accesorios/'],['Carteras','/accesorios/carteras/'],['Billeteras','/accesorios/billeteras/']]],
-    ['Gangas','/gangas/']];
+    ['Sandalias','/sandalias/',[['Ver todas','/sandalias/'],['Plataformas','/sandalias/plataformas/'],['Flats','/sandalias/flats/'],['Taco','/sandalias/taco/'],['Taco chupete','/sandalias/taco-chupete/']]],
+    ['Mocasines','/mocasines/'],['Gangas','/gangas/']];
   var help=[['Mi cuenta','/account/login/'],['Guía de talles','/guia-de-talles/'],['Cambios','/cambios-y-devoluciones/'],['Cómo comprar','/como-comprar/'],['Preguntas','/preguntas-frecuentes/'],['Contacto','/contacto/']];
   var path=location.pathname,n2=function(i){return(i<9?'0':'')+(i+1);};
   var li=cats.map(function(c,i){var cur=path.indexOf(c[1])===0?' rb-cur':'';
@@ -299,7 +298,7 @@ function cart(){
   }
   var cl=function(t){return (t||'').replace(/\s+/g,' ').trim().replace(/,00\b/g,'');};
   function load(){if(sug.dataset.ok)return;sug.dataset.ok='1';
-    Promise.all(['/accesorios/','/new-drop/','/hasta-50-off/'].map(function(u){return fetch(u,{credentials:'same-origin'}).then(function(r){return r.text();}).catch(function(){return '';});})).then(function(pages){
+    Promise.all(['/sandalias/','/new-drop/','/hasta-50-off/'].map(function(u){return fetch(u,{credentials:'same-origin'}).then(function(r){return r.text();}).catch(function(){return '';});})).then(function(pages){
       var seen={},cards=[];
       pages.forEach(function(t,k){var doc=new DOMParser().parseFromString(t,'text/html');
         [].slice.call(doc.querySelectorAll('.js-item-product')).slice(0,k===0?4:3).forEach(function(it){
