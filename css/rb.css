@@ -611,3 +611,6 @@ html:not(.rb-cyber) #ns-section-rb_footer a[href="/hasta-50-off/"]{display:none!
 
 /* ===== 30/10 · filas de totales que Tienda Nube oculta (cupón sin usar): respetar su display:none ===== */
 .rb-cart .cart-totals-row[style*="display:none"],.rb-cart .cart-totals-row[style*="display: none"]{display:none!important}
+
+/* ===== 30/10 · carruseles de productos: el loop de swiper clona tarjetas que nunca reciben .rb-in y quedaban invisibles ===== */
+.rb-js .swiper-slide.rb-rv{opacity:1!important;transform:none!important}
