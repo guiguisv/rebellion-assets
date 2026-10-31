@@ -614,3 +614,11 @@ html:not(.rb-cyber) #ns-section-rb_footer a[href="/hasta-50-off/"]{display:none!
 
 /* ===== 30/10 · carruseles de productos: el loop de swiper clona tarjetas que nunca reciben .rb-in y quedaban invisibles ===== */
 .rb-js .swiper-slide.rb-rv{opacity:1!important;transform:none!important}
+
+/* ===== 31/10 · Cyber desde el 1/11 20 h: las secciones de Sale aparecen solas con .rb-cyber ===== */
+html:not(.rb-cyber) #ns-section-rebajas,html:not(.rb-cyber) #ns-section-h50_prod{display:none!important}
+/* GOcuotas fuera hasta que terminen de configurarlo (pedido de Agos 31/10) */
+.gocuotas-info-container-product,[class*="gocuotas-info"]{display:none!important}
+/* 20% con transferencia, resaltado en la ficha */
+.product-payment-discount{display:inline-block;background:#111;color:#fff!important;padding:7px 12px;margin:6px 0 4px;font-size:12px;letter-spacing:.04em;line-height:1.4}
+.product-payment-discount .text-accent{color:#fff!important;font-weight:700}

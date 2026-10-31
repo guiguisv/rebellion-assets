@@ -78,7 +78,7 @@ function nav(){
   R.classList.add('rb-has-nav');
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
-var PROMO={desde:'2026-11-02T00:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · 2, 3 y 4 de noviembre'};
+var PROMO={desde:'2026-11-01T20:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · hasta el 4 de noviembre'};
 function promo(){
   var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
   for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
@@ -376,6 +376,9 @@ function lazyVid(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){load(e.target);io.unobserve(e.target);}});},{rootMargin:'600px 0px'});
   vs.forEach(function(v){io.observe(v);});
 }
-function go(){nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();waDuda();lazyVid();}
+/* ---------- "superando los $249.999" (así lo arma Tienda Nube) -> "desde $250.000" ---------- */
+function envioTxt(){[].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
+  if(/249\.999/.test(e.textContent))e.innerHTML=e.innerHTML.replace(/superando los \$249\.999/,'desde $250.000');});}
+function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();waDuda();lazyVid();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
