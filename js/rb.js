@@ -382,7 +382,7 @@ function lazyVid(){
 function vistaCyber(){
   if(rbPrev()!=='cyber')return;
   var b=D.createElement('div');b.className='rb-prev';b.innerHTML='Vista previa del Cyber · solo la ves vos · <a href="'+location.pathname+'?rbpromo=off">Salir</a>';D.body.appendChild(b);
-  var fm=function(n){return '$'+Math.round(n).toLocaleString('es-AR');},cy=function(p,pct){return Math.round(p*(100-pct)/100/100)*100;};
+  var num=function(t){return +(t||'').replace(/[^\d,]/g,'').split(',')[0]||0;},fm=function(n){return '$'+Math.round(n).toLocaleString('es-AR');},cy=function(p,pct){return Math.round(p*(100-pct)/100/100)*100;};
   var pinta=function(box,pe,pct){var cur=num(pe.textContent);if(!cur||cur===+pe.dataset.rbN)return;var cmp=box.querySelector('.js-compare-price-display');
     if(cmp&&!pe.dataset.rbN&&getComputedStyle(cmp).display!=='none')return; /* ya tiene precio promocional real */
     var n=cy(cur,pct);pe.dataset.rbN=n;pe.textContent=fm(n);
