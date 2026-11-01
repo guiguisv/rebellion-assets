@@ -629,5 +629,5 @@ html:not(.rb-cyber) #ns-section-rebajas,html:not(.rb-cyber) #ns-section-h50_prod
 
 /* ===== 1/11 · etiqueta "Gratis" en tarjetas: ningun producto tiene envio gratis propio, el minimo se avisa en barra y carrito ===== */
 .js-item-product .js-free-shipping-minimum-label,.rb-dcard .js-free-shipping-minimum-label{display:none!important}
-/* ficha en compu: producto con una sola foto, entra entera en pantalla sin bajar (fotos con el zapato abajo) */
-@media(min-width:768px){.js-product-images .swiper-wrapper:has(>.js-product-slide:only-child) .js-product-slide-link{padding-bottom:0!important;height:calc(100vh - 185px);max-height:1095px;min-height:420px}.js-product-images .swiper-wrapper:has(>.js-product-slide:only-child) .js-product-slide-img{height:100%!important;object-fit:contain!important;object-position:center}}
+/* ficha en compu: la foto principal entra entera en pantalla sin bajar (fotos con el zapato abajo) */
+@media(min-width:768px){.js-product-images .swiper-wrapper>.js-product-slide:first-child .js-product-slide-link{padding-bottom:0!important;height:calc(100vh - 185px);max-height:1095px;min-height:420px}.js-product-images .swiper-wrapper>.js-product-slide:first-child .js-product-slide-img{height:100%!important;object-fit:contain!important;object-position:center}}
