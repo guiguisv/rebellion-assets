@@ -104,18 +104,22 @@ function travel(){
   if(!t||!dock||!hero)return;
   var c=D.createElement('div');c.className='rb-travel';c.textContent=t.textContent.trim();c.setAttribute('aria-hidden','true');D.body.appendChild(c);
   R.classList.add('rb-travel-on');
-  var st,dist,heroBottom,ch;
+  var st,dist,heroBottom,ch,choca;
   function measure(){
     var cs=getComputedStyle(t);c.style.fontSize=cs.fontSize;c.style.letterSpacing=cs.letterSpacing;
     ch=c.offsetHeight;dock.style.height=(ch+Math.round(W.innerHeight*0.12))+'px';
     var r=t.getBoundingClientRect(),y=W.scrollY||W.pageYOffset;
     st=r.top+y;var dr=dock.getBoundingClientRect();var end=dr.top+y+(dr.height-ch)/2;
     dist=Math.max(0,end-st);var hb=hero.getBoundingClientRect();heroBottom=hb.bottom+y;
+    /* si la seccion del Cyber esta antes del indice, el cartel se mete abajo de ella y desaparece */
+    var sale=D.querySelector('.rb-sale');choca=!!(sale&&sale.offsetHeight&&sale.getBoundingClientRect().top<dr.top);
+    if(choca){sale.style.position='relative';sale.style.zIndex='31';dock.style.height='0';dist=Math.max(0,sale.getBoundingClientRect().top+y-st);}
     c.style.top=st+'px';c.style.left=((W.innerWidth-c.offsetWidth)/2)+'px';
     frame();
   }
   function frame(){var y=W.scrollY||W.pageYOffset,m=reduce?dist:Math.min(y,dist);
     c.style.transform='translate3d(0,'+m.toFixed(1)+'px,0)';
+    if(choca){c.style.visibility=y>=dist-1?'hidden':'visible';return;}
     c.classList.toggle('rb-dark',st+m+ch*0.55>heroBottom);c.classList.toggle('rb-docked',m>=dist-1);}
   var tk=false;W.addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(function(){tk=false;frame();});}},{passive:true});
   W.addEventListener('resize',measure);W.addEventListener('load',measure);
