@@ -79,10 +79,12 @@ function nav(){
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
 var PROMO={desde:'2026-11-01T20:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · hasta el 4 de noviembre'};
+function rbPrev(){var q=(location.search.match(/rbpromo=(\w+)/)||[])[1];
+  try{if(q==='cyber')sessionStorage.setItem('rbpromo','cyber');if(q==='off')sessionStorage.removeItem('rbpromo');return q==='off'?'':(q||sessionStorage.getItem('rbpromo')||'');}catch(e){return q==='off'?'':(q||'');}}
 function promo(){
   var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
   for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
-  var now=Date.now(),a=Date.parse(c.desde),b=Date.parse(c.hasta),q=(location.search.match(/rbpromo=(\w+)/)||[])[1];
+  var now=Date.now(),a=Date.parse(c.desde),b=Date.parse(c.hasta),q=rbPrev();
   var phase=q||(now>=a&&now<b?'cyber':(now<a&&a-now<c.previa_dias*864e5?'pre':''));
   if(!phase)return;
   R.classList.add('rb-'+phase);
@@ -244,7 +246,7 @@ function mnav(){
     ['Sandalias','/sandalias/',[['Ver todas','/sandalias/'],['Plataformas','/sandalias/plataformas/'],['Flats','/sandalias/flats/'],['Taco','/sandalias/taco/'],['Taco chupete','/sandalias/taco-chupete/']]],
     ['Mocasines','/mocasines/']];
   /* Sale/Gangas solo durante el Cyber (hoy no hay nada con descuento) */
-  var now=Date.now(),cy=/rbpromo=cyber/.test(location.search)||(now>=Date.parse(PROMO.desde)&&now<Date.parse(PROMO.hasta));
+  var now=Date.now(),cy=rbPrev()==='cyber'||(now>=Date.parse(PROMO.desde)&&now<Date.parse(PROMO.hasta));
   if(cy)cats.push(['Cyber','/hasta-50-off/']);
   var help=[['Mi cuenta','/account/login/'],['Guía de talles','/guia-de-talles/'],['Cambios','/cambios-y-devoluciones/'],['Cómo comprar','/como-comprar/'],['Preguntas','/preguntas-frecuentes/'],['Contacto','/contacto/']];
   var path=location.pathname,n2=function(i){return(i<9?'0':'')+(i+1);};
@@ -376,9 +378,29 @@ function lazyVid(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){load(e.target);io.unobserve(e.target);}});},{rootMargin:'600px 0px'});
   vs.forEach(function(v){io.observe(v);});
 }
+/* ---------- Vista previa del Cyber (?rbpromo=cyber, ?rbpromo=off para salir): simula en pantalla los precios, no cambia nada en la tienda ---------- */
+function vistaCyber(){
+  if(rbPrev()!=='cyber')return;
+  var b=D.createElement('div');b.className='rb-prev';b.innerHTML='Vista previa del Cyber · solo la ves vos · <a href="'+location.pathname+'?rbpromo=off">Salir</a>';D.body.appendChild(b);
+  var fm=function(n){return '$'+Math.round(n).toLocaleString('es-AR');},cy=function(p,pct){return Math.round(p*(100-pct)/100/100)*100;};
+  var pinta=function(box,pe,pct){var cur=num(pe.textContent);if(!cur||cur===+pe.dataset.rbN)return;var cmp=box.querySelector('.js-compare-price-display');
+    if(cmp&&!pe.dataset.rbN&&getComputedStyle(cmp).display!=='none')return; /* ya tiene precio promocional real */
+    var n=cy(cur,pct);pe.dataset.rbN=n;pe.textContent=fm(n);
+    if(cmp){cmp.textContent=fm(cur);cmp.style.display=cmp.id?'block':'inline';}
+    var ins=box.querySelector('.js-installment-price');if(ins)ins.textContent=fm(n/6);
+    var tr=box.querySelector('.js-payment-discount-price-product');if(tr)tr.textContent=fm(n*.8);};
+  fetch('https://guiguisv.github.io/rebellion-assets/cyber/promos.json?v=1').then(function(r){return r.json();}).then(function(map){
+    var pasar=function(){
+      [].forEach.call(D.querySelectorAll('.js-item-product[data-product-id]'),function(c){var pct=map[c.getAttribute('data-product-id')],pe=c.querySelector('.js-price-display');if(!pct||!pe)return;pinta(c,pe,pct);
+        var img=c.querySelector('.product-item-image-container');if(img&&!img.querySelector('.rb-off')){var s=D.createElement('span');s.className='rb-off';s.textContent='-'+pct+'%';img.appendChild(s);}});
+      var nom=D.querySelector('.js-product-name[data-store^="product-name-"]');if(!nom)return;
+      var box=nom.closest('.js-product-info'),pct=map[nom.getAttribute('data-store').replace('product-name-','')],pe=D.getElementById('price_display');if(!box||!pct||!pe)return;pinta(box,pe,pct);
+      var of=box.querySelector('.js-offer-label');if(of){var o=of.querySelector('.js-offer-percentage');if(o)o.textContent=pct;of.style.display='inline-block';}};
+    pasar();setInterval(pasar,1200);});
+}
 /* ---------- "superando los $249.999" (así lo arma Tienda Nube) -> "desde $250.000" ---------- */
 function envioTxt(){[].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
   if(/249\.999/.test(e.textContent))e.textContent=/Gratis/i.test(e.textContent)?'Gratis desde $250.000':'desde $250.000';});}
-function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();travel();index();deals();ficha();mark();waDuda();lazyVid();}
+function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();vistaCyber();travel();index();deals();ficha();mark();waDuda();lazyVid();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
