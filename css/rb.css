@@ -631,3 +631,15 @@ html:not(.rb-cyber) #ns-section-rebajas,html:not(.rb-cyber) #ns-section-h50_prod
 .js-item-product .js-free-shipping-minimum-label,.rb-dcard .js-free-shipping-minimum-label{display:none!important}
 /* ficha en compu: la foto principal entra entera en pantalla sin bajar (fotos con el zapato abajo) */
 @media(min-width:768px){.js-product-images .swiper-wrapper>.js-product-slide:first-child .js-product-slide-link{padding-bottom:0!important;height:calc(100vh - 185px);max-height:1095px;min-height:420px}.js-product-images .swiper-wrapper>.js-product-slide:first-child .js-product-slide-img{height:100%!important;object-fit:contain!important;object-position:center}}
+/* carrito en pagina (/comprar/): el numero de cantidad quedaba con ancho 0. Misma caja que el carrito lateral */
+.template-cart .cart-item-quantity{margin:0!important;width:auto!important}
+.template-cart .form-quantity{width:104px!important;height:36px;margin:0!important;border:1px solid rgba(17,17,17,.22)!important;border-radius:0!important;background:#fff}
+.template-cart .form-quantity .grid{display:grid!important;grid-template-columns:34px 1fr 34px!important;height:100%;align-items:center}
+.template-cart .cart-quantity-btn{display:flex!important;align-items:center;justify-content:center;width:auto!important;height:34px;padding:0!important;border:0!important;background:none!important}
+.template-cart .cart-quantity-btn svg{width:10px;height:10px}
+.template-cart .form-quantity .form-control-container{height:34px;min-width:0}
+.template-cart .cart-quantity-input{display:block;width:100%!important;height:34px!important;line-height:34px;padding:0!important;border:0!important;background:none!important;text-align:center;font-size:13px!important;color:#111!important;-moz-appearance:textfield;appearance:textfield}
+.template-cart .cart-quantity-input::-webkit-inner-spin-button,.template-cart .cart-quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+/* flechas del pie: el caracter se ve como emoji azul en iPhone, se dibujan igual en todos los equipos */
+.rb-f-card em,.rb-f-social em{font-size:0!important;width:12px;height:12px;flex:0 0 12px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.2'%3E%3Cpath d='M2.5 9.5l7-7M4 2.5h5.5V8'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.2'%3E%3Cpath d='M2.5 9.5l7-7M4 2.5h5.5V8'/%3E%3C/svg%3E") center/contain no-repeat}
+.rb-f-social em{align-self:center;width:14px;height:14px;flex-basis:14px}
