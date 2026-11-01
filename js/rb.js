@@ -171,7 +171,7 @@ function deals(){
         var nm=cl((it.querySelector('.js-item-name')||{}).textContent),pr=cl((it.querySelector('.js-price-display')||{}).textContent);
         var cp=it.querySelector('.js-compare-price-display'),cpt=cp&&!/display:\s*none/.test(cp.getAttribute('style')||'')?cl(cp.textContent):'';
         var off='';if(cpt){var x=+cpt.replace(/\D/g,''),y=+pr.replace(/\D/g,'');if(x>y&&y)off='<em>-'+Math.round((1-y/x)*100)+'%</em>';}
-        return '<a class="rb-dcard" href="'+(a?a.getAttribute('href'):li.dataset.url)+'"><span class="rb-dcard-img"><img src="'+src+'" alt="'+nm+'" decoding="async">'+off+'</span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span></a>';
+        return '<a class="rb-dcard" data-pid="'+it.getAttribute('data-product-id')+'" href="'+(a?a.getAttribute('href'):li.dataset.url)+'"><span class="rb-dcard-img"><img src="'+src+'" alt="'+nm+'" decoding="async">'+off+'</span><b>'+nm+'</b><span>'+(cpt?'<s>'+cpt+'</s> ':'')+pr+'</span></a>';
       }).join('');
       rail.innerHTML=html||'<p class="rb-deal-load">Muy pronto</p>';
     }).catch(function(){rail.dataset.ok='';rail.innerHTML='';});
@@ -393,6 +393,8 @@ function vistaCyber(){
     var pasar=function(){
       [].forEach.call(D.querySelectorAll('.js-item-product[data-product-id]'),function(c){var pct=map[c.getAttribute('data-product-id')],pe=c.querySelector('.js-price-display');if(!pct||!pe)return;pinta(c,pe,pct);
         var img=c.querySelector('.product-item-image-container');if(img&&!img.querySelector('.rb-off')){var s=D.createElement('span');s.className='rb-off';s.textContent='-'+pct+'%';img.appendChild(s);}});
+      [].forEach.call(D.querySelectorAll('.rb-dcard[data-pid]:not([data-rb-n])'),function(c){var pct=map[c.getAttribute('data-pid')],sp=c.querySelector(':scope > span:last-child');if(!pct||!sp||sp.querySelector('s'))return;
+        var cur=num(sp.textContent),n=cy(cur,pct);if(!cur)return;c.setAttribute('data-rb-n',n);sp.innerHTML='<s>'+fm(cur)+'</s> '+fm(n);var im=c.querySelector('.rb-dcard-img');if(im&&!im.querySelector('em')){var e=D.createElement('em');e.textContent='-'+pct+'%';im.appendChild(e);}});
       var nom=D.querySelector('.js-product-name[data-store^="product-name-"]');if(!nom)return;
       var box=nom.closest('.js-product-info'),pct=map[nom.getAttribute('data-store').replace('product-name-','')],pe=D.getElementById('price_display');if(!box||!pct||!pe)return;pinta(box,pe,pct);
       var of=box.querySelector('.js-offer-label');if(of){var o=of.querySelector('.js-offer-percentage');if(o)o.textContent=pct;of.style.display='inline-block';}};
