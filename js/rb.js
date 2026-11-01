@@ -378,6 +378,19 @@ function lazyVid(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){load(e.target);io.unobserve(e.target);}});},{rootMargin:'600px 0px'});
   vs.forEach(function(v){io.observe(v);});
 }
+/* ---------- Pestaña Cyber: New Drop arriba de todo (sin tocar el orden general de la tienda) ---------- */
+function cyberTop(){
+  if(!R.classList.contains('rb-cyber')||!/^\/hasta-50-off\/?$/.test(location.pathname)||/[?&](sort_by|page|mpage|min_price|max_price|Color|Talle)/i.test(location.search))return;
+  var grid=D.querySelector('.js-product-table');if(!grid)return;
+  var parse=function(u){return fetch(u,{credentials:'same-origin'}).then(function(r){return r.text();}).then(function(t){return [].slice.call(new DOMParser().parseFromString(t,'text/html').querySelectorAll('.js-item-product[data-product-id]'));}).catch(function(){return [];});};
+  Promise.all([parse('/new-drop/'),parse('/new-drop/page/2/')]).then(function(r){
+    var cards=r[0].concat(r[1]),ids={},frag=D.createDocumentFragment();if(!cards.length)return;
+    cards.forEach(function(c){var id=c.getAttribute('data-product-id');if(ids[id])return;ids[id]=1;var n=D.importNode(c,true);n.classList.remove('rb-rv2','rb-in','rb-b');n.setAttribute('data-rb-top','1');frag.appendChild(n);});
+    var limpia=function(){[].forEach.call(grid.querySelectorAll('.js-item-product[data-product-id]:not([data-rb-top])'),function(c){if(ids[c.getAttribute('data-product-id')])c.remove();});};
+    limpia();grid.insertBefore(frag,grid.firstChild);badges();
+    new MutationObserver(function(){limpia();badges();}).observe(grid,{childList:true});
+  });
+}
 /* ---------- Vista previa del Cyber (?rbpromo=cyber, ?rbpromo=off para salir): simula en pantalla los precios, no cambia nada en la tienda ---------- */
 function vistaCyber(){
   if(rbPrev()!=='cyber')return;
@@ -403,6 +416,6 @@ function vistaCyber(){
 /* ---------- "superando los $249.999" (así lo arma Tienda Nube) -> "desde $250.000" ---------- */
 function envioTxt(){[].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
   if(/249\.999/.test(e.textContent))e.textContent=/Gratis/i.test(e.textContent)?'Gratis desde $250.000':'desde $250.000';});}
-function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();vistaCyber();travel();index();deals();ficha();mark();waDuda();lazyVid();}
+function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();cyberTop();vistaCyber();travel();index();deals();ficha();mark();waDuda();lazyVid();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
 })();
