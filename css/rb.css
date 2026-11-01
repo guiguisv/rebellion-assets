@@ -626,3 +626,6 @@ html:not(.rb-cyber) #ns-section-rebajas,html:not(.rb-cyber) #ns-section-h50_prod
 /* ===== vista previa del Cyber ===== */
 .rb-prev{position:fixed;left:50%;transform:translateX(-50%);top:0;white-space:nowrap;z-index:99999;background:#111;color:#fff;font-size:11px;letter-spacing:.06em;padding:9px 12px;line-height:1.3}
 .rb-prev a{color:#fff;text-decoration:underline;margin-left:4px}
+
+/* ===== 1/11 · etiqueta "Gratis" en tarjetas: ningun producto tiene envio gratis propio, el minimo se avisa en barra y carrito ===== */
+.js-item-product .js-free-shipping-minimum-label,.rb-dcard .js-free-shipping-minimum-label{display:none!important}
