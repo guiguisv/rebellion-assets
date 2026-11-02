@@ -643,3 +643,10 @@ html:not(.rb-cyber) #ns-section-rebajas,html:not(.rb-cyber) #ns-section-h50_prod
 /* flechas del pie: el caracter se ve como emoji azul en iPhone, se dibujan igual en todos los equipos */
 .rb-f-card em,.rb-f-social em{font-size:0!important;width:12px;height:12px;flex:0 0 12px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.2'%3E%3Cpath d='M2.5 9.5l7-7M4 2.5h5.5V8'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='1.2'%3E%3Cpath d='M2.5 9.5l7-7M4 2.5h5.5V8'/%3E%3C/svg%3E") center/contain no-repeat}
 .rb-f-social em{align-self:center;width:14px;height:14px;flex-basis:14px}
+/* ficha en compu: 60% + 40% + separacion de 48px se pasaba del ancho y cortaba el boton de agregar al carrito */
+@media(min-width:1200px){.product-columns>.js-product-info{flex:0 0 calc(40% - 48px)!important;width:calc(40% - 48px)!important;max-width:calc(40% - 48px)!important;min-width:0}}
+@media(min-width:768px) and (max-width:1199px){.product-columns>.js-product-images{flex:0 0 50%!important;width:50%!important;max-width:50%!important;min-width:0}.product-columns>.js-product-info{flex:0 0 calc(50% - 48px)!important;width:calc(50% - 48px)!important;max-width:calc(50% - 48px)!important;min-width:0}.js-product-form .js-addtocart{padding-left:8px!important;padding-right:8px!important;letter-spacing:.14em!important}}
+/* calculador de envio: campo y boton a la misma altura, "no se mi codigo postal" alineado a la izquierda */
+.shipping-calculator .js-shipping-input{width:100%!important;height:48px!important;margin:0!important}
+.shipping-calculator .js-calculate-shipping{height:48px!important;margin:0!important;padding-left:20px!important;padding-right:20px!important}
+.shipping-calculator .js-shipping-zipcode-help{display:inline-block!important;padding:10px 0!important;text-align:left!important}
