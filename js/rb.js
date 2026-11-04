@@ -279,11 +279,13 @@ function mnav(){
   W.addEventListener('pageshow',close);
 }
 /* ---------- Carrito: encabezado, barra de envío gratis, sugerencias y total fijo abajo ---------- */
-var ENVIO_GRATIS=250000;
+/* promo envío gratis 24 hs: hasta esa hora todos los textos dicen gratis; después vuelven solos a $250.000. La regla de Descuentos > Envío gratis se apaga a mano. */
+var envioPromo=Date.now()<Date.parse('2026-11-05T16:22:00-03:00');
+var ENVIO_GRATIS=envioPromo?0:250000;
 /* la línea "Envío gratis" de la barra de anuncios se actualiza con lo que hay en el carrito (null = carrito vacío) */
 var envioUlt=null;
 function envioLinea(falta){envioUlt=falta;var m$=function(n){return '$'+Math.round(n).toLocaleString('es-AR');};
-  var tx=falta===null?'Envío gratis desde '+m$(ENVIO_GRATIS):(falta?'Te faltan '+m$(falta)+' para el envío gratis':'¡Ya tenés envío gratis!');
+  var tx=falta===null?(envioPromo?'Envío gratis a todo el país por 24 hs':'Envío gratis desde '+m$(ENVIO_GRATIS)):(falta?'Te faltan '+m$(falta)+' para el envío gratis':'¡Ya tenés envío gratis!');
   [].forEach.call(D.querySelectorAll('.rb-marquee-track span, .navigation-bar .announcement'),function(s){
     if(!s.dataset.rbEnvio&&!/env[ií]o gratis/i.test(s.textContent))return;s.dataset.rbEnvio='1';if(s.textContent!==tx)s.textContent=tx;});}
 setTimeout(function(){envioLinea(envioUlt);},1200);
@@ -418,7 +420,8 @@ function vistaCyber(){
     pasar();setInterval(pasar,1200);});
 }
 /* ---------- "superando los $249.999" (así lo arma Tienda Nube) -> "desde $250.000" ---------- */
-function envioTxt(){[].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
+function envioTxt(){if(envioPromo)[].forEach.call(D.querySelectorAll('.icon-text-item-title'),function(e){if(/env[ií]o gratis/i.test(e.textContent))e.textContent='Envío gratis por 24 hs';});
+  [].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
   if(/249\.999/.test(e.textContent))e.textContent=/Gratis/i.test(e.textContent)?'Gratis desde $250.000':'desde $250.000';});}
 function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();cyberTop();vistaCyber();travel();index();deals();ficha();mark();waDuda();lazyVid();}
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',go);else go();
