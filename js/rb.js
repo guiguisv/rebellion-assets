@@ -421,6 +421,7 @@ function vistaCyber(){
 }
 /* ---------- "superando los $249.999" (así lo arma Tienda Nube) -> "desde $250.000" ---------- */
 function envioTxt(){if(envioPromo)[].forEach.call(D.querySelectorAll('.icon-text-item-title'),function(e){if(/env[ií]o gratis/i.test(e.textContent))e.textContent='Envío gratis por 24 hs';});
+  if(envioPromo)[].forEach.call(D.querySelectorAll('.icon-text-item-description'),function(e){if(/Gratis desde \$250\.000/.test(e.textContent))e.textContent=e.textContent.replace(/Gratis desde \$250\.000/,'Gratis por 24 hs');});
   [].forEach.call(D.querySelectorAll('.js-shipping-minimum-label, .ship-free-rest-text'),function(e){
   if(/249\.999/.test(e.textContent))e.textContent=/Gratis/i.test(e.textContent)?'Gratis desde $250.000':'desde $250.000';});}
 function go(){envioTxt();setTimeout(envioTxt,1500);nav();mnav();cart();lookbook();heroTri();promo();cyberTop();vistaCyber();travel();index();deals();ficha();mark();waDuda();lazyVid();}
