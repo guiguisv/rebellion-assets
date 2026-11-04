@@ -280,7 +280,7 @@ function mnav(){
 }
 /* ---------- Carrito: encabezado, barra de envío gratis, sugerencias y total fijo abajo ---------- */
 /* promo envío gratis 24 hs: hasta esa hora todos los textos dicen gratis; después vuelven solos a $250.000. La regla de Descuentos > Envío gratis se apaga a mano. */
-var envioPromo=false&&Date.now()<Date.parse('2026-11-05T16:22:00-03:00');
+var envioPromo=Date.now()<Date.parse('2026-11-05T16:22:00-03:00');
 var ENVIO_GRATIS=envioPromo?0:250000;
 /* la línea "Envío gratis" de la barra de anuncios se actualiza con lo que hay en el carrito (null = carrito vacío) */
 var envioUlt=null;
