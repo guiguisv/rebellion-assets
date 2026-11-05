@@ -78,12 +78,13 @@ function nav(){
   R.classList.add('rb-has-nav');
 }
 /* ---------- Cyber: cambia textos solo por fecha (vista previa con ?rbpromo=cyber o ?rbpromo=pre) ---------- */
-var PROMO={desde:'2026-11-01T20:00:00-03:00',hasta:'2026-11-05T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · hasta el 4 de noviembre'};
+var PROMO={desde:'2026-11-01T20:00:00-03:00',hasta:'2026-11-08T00:00:00-03:00',previa_dias:0,menu:'Cyber',anuncio:'Cyber Rebellion · hasta el 7 de noviembre',eyebrow:'Cyber Rebellion — hasta el 7 de noviembre',banda:'<b>Cyber Rebellion</b><span>✦</span>hasta el 7 de noviembre<span>✦</span><b>Precios Cyber</b><span>✦</span>3 y 6 cuotas sin interés<span>✦</span>20% off con transferencia<span>✦</span>'};
 function rbPrev(){var q=(location.search.match(/rbpromo=(\w+)/)||[])[1];
   try{if(q==='cyber')sessionStorage.setItem('rbpromo','cyber');if(q==='off')sessionStorage.removeItem('rbpromo');return q==='off'?'':(q||sessionStorage.getItem('rbpromo')||'');}catch(e){return q==='off'?'':(q||'');}}
 function promo(){
   var el=D.getElementById('rb-promo'),c={};try{c=el?(JSON.parse(el.textContent).cyber||{}):{};}catch(e){}
-  for(var k in PROMO)if(!(k in c))c[k]=PROMO[k];
+  /* extensión del Cyber: PROMO manda sobre las fechas y textos cargados en la home */
+  for(var k in PROMO)c[k]=PROMO[k];
   var now=Date.now(),a=Date.parse(c.desde),b=Date.parse(c.hasta),q=rbPrev();
   var phase=q||(now>=a&&now<b?'cyber':(now<a&&a-now<c.previa_dias*864e5?'pre':''));
   if(!phase)return;
